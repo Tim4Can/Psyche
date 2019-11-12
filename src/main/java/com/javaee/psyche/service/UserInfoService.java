@@ -21,9 +21,9 @@ public class UserInfoService {
         User user = new User();
         user.setId(id);
         user.setPassword(password);
-        User user1 = userInfoDao.saveAndFlush(user);
+        userInfoDao.saveAndFlush(user);
 
-        return user1.toString();
+        return "success...";
     }
 
 }
