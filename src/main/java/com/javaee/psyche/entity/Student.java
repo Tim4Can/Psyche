@@ -3,18 +3,20 @@ package com.javaee.psyche.entity;
 import lombok.Data;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "User")
+@Table(name = "student")
 @Entity
-@Data public class User {
-    @Id
-    @GeneratedValue
-    private int id ;
+@Data public class Student {
 
-    private String name ;
+    @Id
+    private int Id;
+
+    private String name;
+    private String nickName;
     private String password;
+    private String hesdPortrait;
+    private int identity;
 
 }
