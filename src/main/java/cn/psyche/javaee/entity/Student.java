@@ -9,8 +9,8 @@ import java.io.Serializable;
 @Data
 @Table(name="student")
 public class Student implements Serializable{
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private int id;
     private String name;
     private String nickName;
@@ -21,7 +21,7 @@ public class Student implements Serializable{
     @Override
     public String toString(){
         return "{ id="+getId()+", name="+getName()+", nickName="+getNickName()
-                +", headPortrait="+getHeadPortrait()+", identity"+getIdentity()+"}";
+                +", headPortrait="+getHeadPortrait()+", identity="+getIdentity()+"}";
     }
 
     public void copy(Student s){

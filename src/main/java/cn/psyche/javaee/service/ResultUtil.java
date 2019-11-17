@@ -21,4 +21,10 @@ public class ResultUtil {
         result.setMsg(msg);
         return result;
     }
+    public static Result type(ResultEnum e){
+        Result result=new Result();
+        result.setCode(e.getCode());
+        result.setMsg(e.getMsg());
+        return result;
+    }
 }

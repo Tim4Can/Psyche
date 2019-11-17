@@ -21,12 +21,12 @@ public class LoginService {
 
         if(optional.isPresent()){
             session.setAttribute(ConstantUtils.USER_SESSION_KEY,optional.get());
-            session.setMaxInactiveInterval(7200);
+            session.setMaxInactiveInterval(3600); //lasts an hour.
             Student s=new Student();
             s.copy(optional.get());
             return ResultUtil.success(s);
         }else{
-            return ResultUtil.error(11,"Login Fail");
+            return ResultUtil.type(ResultEnum.LOGIN_FAIL);
         }
 
 

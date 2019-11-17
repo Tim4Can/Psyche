@@ -5,6 +5,8 @@ public enum ResultEnum {
     FAIL(400,"fail"),
     UNAUTHORIZED(401,"unauthorized"),
     NOT_FOUND(404,"not found"),
+    LOGIN_FAIL(1,"invalid password or user"),
+    NOT_LOGIN(2,"login please."),
     INTERNAL_SERVER_ERROR(500,"internal server error");
 
     public int code;

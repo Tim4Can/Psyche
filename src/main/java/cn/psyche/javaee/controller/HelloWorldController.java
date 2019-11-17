@@ -18,7 +18,6 @@ public class HelloWorldController {
     @GetMapping("/test")
     @ResponseBody
     public Result test() throws Exception {
-        String str = "程序猿最帅";
         Student s=new Student();
         s.setName("XiaoMing");
         s.setId(123);

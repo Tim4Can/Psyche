@@ -2,11 +2,7 @@ package cn.psyche.javaee.controller;
 
 import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.entity.Student;
-import cn.psyche.javaee.service.ConstantUtils;
-import cn.psyche.javaee.service.Result;
-import cn.psyche.javaee.service.LoginService;
-import cn.psyche.javaee.service.ResultUtil;
-import jdk.nashorn.internal.ir.RuntimeNode;
+import cn.psyche.javaee.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,24 +17,8 @@ public class StudentController {
     StudentDao studentDao;
     @Autowired
     private LoginService loginService;
-
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Student getUserById(@PathVariable("id") int id) {
-        return studentDao.findById(id).orElse(null);
-    }
-
-    @RequestMapping(value="/{id}",method=RequestMethod.PUT)
-    public String updatePerson(@PathVariable("id") int id,
-                               @RequestParam (value="name",required = true) String name){
-        Student user=new Student();
-        user.setName(name);
-        user.setId(id);
-        Student u1= studentDao.saveAndFlush(user);
-
-        return u1.toString();
-        //return "Success";
-    }
+    @Autowired
+    private MyInfosService myInfosService;
 
 /*
     @RequestMapping(value="/login/{id}",method=RequestMethod.PUT)
@@ -54,17 +34,46 @@ public class StudentController {
         HttpSession session=request.getSession();
 
         return loginService.login(id,pwd,session);
-        //return ResultUtil.error(id,pwd);
     }
 
-    @RequestMapping("/getStu")
-    public Result test(HttpServletRequest request){
+    @RequestMapping(value = "/myInfos",method = RequestMethod.GET)
+    public Result getMyInfos(HttpServletRequest request){
+        return myInfosService.myInfos(request);
+    }
+
+    @RequestMapping(value = "/myTreeholes",method = RequestMethod.GET)
+    public Result getMyTreeholes(HttpServletRequest request){
         HttpSession session=request.getSession();
-
-        Student s= (Student) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
-        //return loginService.login(id,pwd,session);
-        return ResultUtil.success(s);
+        Student s=(Student)session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        return myInfosService.myTreeholes(s);
     }
 
+
+
+
+
+
+
+
+
+
+
+/*
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Student getUserById(@PathVariable("id") int id) {
+        return studentDao.findById(id).orElse(null);
+    }
+
+    @RequestMapping(value="/{id}",method=RequestMethod.PUT)
+    public String updatePerson(@PathVariable("id") int id,
+                               @RequestParam (value="name",required = true) String name){
+        Student user=new Student();
+        user.setName(name);
+        user.setId(id);
+        Student u1= studentDao.saveAndFlush(user);
+
+        return u1.toString();
+    }
+*/
 
 }

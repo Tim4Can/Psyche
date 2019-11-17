@@ -20,9 +20,9 @@ public class Result {
 
     @Override
     public String toString(){
-        return "{code="+code+
-                ", msg='"+msg+"\'"+
-                ", data="+data+" }";
+        return "{ \"code\": "+code+
+                ", \"msg\": \""+msg+"\""+
+                ", \"data\": "+data+" }";
     }
 
 }
