@@ -26,7 +26,7 @@ public class LoginService {
             s.copy(optional.get());
             return ResultUtil.success(s);
         }else{
-            return ResultUtil.type(ResultEnum.LOGIN_FAIL);
+            return ResultUtil.error(ResultEnum.LOGIN_FAIL);
         }
 
 

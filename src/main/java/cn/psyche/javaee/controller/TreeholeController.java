@@ -3,6 +3,7 @@ package cn.psyche.javaee.controller;
 import cn.psyche.javaee.dao.TreeholeDao;
 import cn.psyche.javaee.service.Result;
 import cn.psyche.javaee.service.ResultUtil;
+import cn.psyche.javaee.service.TreeholeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,18 +17,19 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/Treehole")
 public class TreeholeController {
     @Autowired
-    TreeholeDao treeholeDao;
+    TreeholeService treeholeService;
+
 
     @RequestMapping(method= RequestMethod.GET)
     public Result getList(HttpServletRequest request){
-
+        int page=Integer.parseInt(request.getParameter("page"));
         return ResultUtil.success();
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public Result getTreehole(@PathVariable("id") int id, HttpServletRequest request){
+    @RequestMapping(value="/id={id}", method = RequestMethod.GET)
+    public Result getTreehole(@PathVariable("id") int id){
 
-        return ResultUtil.success();
+        return treeholeService.getTreehole(id);
     }
 
 

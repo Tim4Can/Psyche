@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 public class StudentController {
 
     @Autowired
-    StudentDao studentDao;
-    @Autowired
     private LoginService loginService;
     @Autowired
     private MyInfosService myInfosService;

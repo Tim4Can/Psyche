@@ -22,7 +22,7 @@ public class MyInfosService {
         HttpSession session=request.getSession();
         Student s=(Student)session.getAttribute(ConstantUtils.USER_SESSION_KEY);
         if(s==null){
-            return ResultUtil.type(ResultEnum.NOT_LOGIN);
+            return ResultUtil.error(ResultEnum.NOT_LOGIN);
         }
 
         return ResultUtil.success(s);
@@ -30,15 +30,15 @@ public class MyInfosService {
 
     public Result myTreeholes(Student s){
         if(s==null){
-            return ResultUtil.type(ResultEnum.NOT_LOGIN);
+            return ResultUtil.error(ResultEnum.NOT_LOGIN);
         }
         List<Treehole> treeholes=treeholeDao.findByOwnerId(s.getId());
         holeList[] list=new holeList[treeholes.size()];
         for(int i=0;i<treeholes.size();i++){
             list[i]=new holeList();
             list[i].setByTreehole(treeholes.get(i));
-            System.out.println(treeholes.get(i));
-            System.out.println(list[i]);
+            //System.out.println(treeholes.get(i));
+            //System.out.println(list[i]);
 
         }
         List li = new ArrayList(Arrays.asList(list));
