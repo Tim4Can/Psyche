@@ -1,6 +1,7 @@
 package cn.psyche.javaee.controller;
 
 import cn.psyche.javaee.entity.Student;
+import cn.psyche.javaee.entity.StudentNoPwd;
 import cn.psyche.javaee.service.ConstantUtils;
 import cn.psyche.javaee.service.Result;
 import cn.psyche.javaee.service.ResultEnum;
@@ -29,14 +30,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         //have login
         HttpSession session=request.getSession();
-        Student s= (Student) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        StudentNoPwd s= (StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
         if(s!=null){
             System.out.println("user pass");
             return true;
         }
 
         //not login
-        returnJson(response, ResultUtil.type(ResultEnum.NOT_LOGIN));
+        returnJson(response, ResultUtil.error(ResultEnum.NOT_LOGIN));
         System.out.println("not pass");
         return false;
 

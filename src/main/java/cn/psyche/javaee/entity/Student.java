@@ -24,11 +24,4 @@ public class Student implements Serializable{
                 +", headPortrait="+getHeadPortrait()+", identity="+getIdentity()+"}";
     }
 
-    public void copy(Student s){
-        this.id=s.id;
-        this.name=s.name;
-        this.nickName=s.nickName;
-        this.headPortrait=s.headPortrait;
-        this.identity=s.identity;
-    }
 }

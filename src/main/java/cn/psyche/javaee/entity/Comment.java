@@ -11,7 +11,7 @@ import java.util.Date;
 public class Comment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    int id;
     int speakerId;
     int treeHoleId;
     String content;

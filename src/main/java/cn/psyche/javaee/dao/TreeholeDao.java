@@ -10,7 +10,8 @@ import java.util.List;
 public interface TreeholeDao extends JpaRepository<Treehole,Integer> {
     List<Treehole> findByOwnerId(int id);
     Treehole findById(int id);
+    //Page<Treehole> findAll(Pageable pegeable);
     Page<Treehole> findAll(Pageable pegeable);
-    @Override
+    Page<Treehole> findByOwnerId(int id,Pageable pegeable);
     long count();
 }

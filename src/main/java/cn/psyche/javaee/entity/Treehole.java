@@ -11,7 +11,7 @@ import java.util.Date;
 public class Treehole implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    int id;
     String title;
     @Basic
     @Column(columnDefinition = "text")

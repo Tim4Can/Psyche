@@ -2,6 +2,7 @@ package cn.psyche.javaee.service;
 
 import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.entity.Student;
+import cn.psyche.javaee.entity.StudentNoPwd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +18,14 @@ public class LoginService {
 
     public  Result login(int id, String pwd,HttpSession session){
 
-        Optional<Student> optional=studentDao.findByIdAndPassword(id,pwd);
+        Optional<StudentNoPwd> optional=studentDao.findByIdAndPassword(id,pwd);
 
         if(optional.isPresent()){
             session.setAttribute(ConstantUtils.USER_SESSION_KEY,optional.get());
             session.setMaxInactiveInterval(3600); //lasts an hour.
-            Student s=new Student();
-            s.copy(optional.get());
-            return ResultUtil.success(s);
+            //Student s=new Student();
+            //s.copy(optional.get());
+            return ResultUtil.success(optional.get());
         }else{
             return ResultUtil.error(ResultEnum.LOGIN_FAIL);
         }

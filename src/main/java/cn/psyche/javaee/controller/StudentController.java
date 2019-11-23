@@ -2,6 +2,7 @@ package cn.psyche.javaee.controller;
 
 import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.entity.Student;
+import cn.psyche.javaee.entity.StudentNoPwd;
 import cn.psyche.javaee.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +19,7 @@ public class StudentController {
     @Autowired
     private MyInfosService myInfosService;
 
-/*
-    @RequestMapping(value="/login/{id}",method=RequestMethod.PUT)
-    public Result login(@PathVariable("id") int id,
-                        @RequestParam (value="pwd",required = true) String pwd){
-        return loginService.login(id,pwd);
-    }
-*/
+
     @RequestMapping("/login")
     public Result login(HttpServletRequest request){
         int id=Integer.parseInt(request.getParameter("id"));
@@ -40,15 +35,28 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/myTreeholes",method = RequestMethod.GET)
-    public Result getMyTreeholes(HttpServletRequest request){
+    public Result getMyTreeholes(HttpServletRequest request,@RequestParam(value="page",required = false,defaultValue = "0") int page){
         HttpSession session=request.getSession();
-        Student s=(Student)session.getAttribute(ConstantUtils.USER_SESSION_KEY);
-        return myInfosService.myTreeholes(s);
+        StudentNoPwd s=(StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        return ResultUtil.success(myInfosService.myTreeholes(s,page));
     }
 
+    @RequestMapping(value = "/modifyPwd")
+    public Result modifyPwd(HttpServletRequest request){
+        HttpSession session=request.getSession();
+        StudentNoPwd s=(StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        String newPwd=request.getParameter("newPwd");
+        String oldPwd=request.getParameter("oldPwd");
 
+        return myInfosService.modifyPwd(newPwd,oldPwd,s);
+    }
 
-
+    @RequestMapping(value="/loginOut")
+    public Result loginOut(HttpServletRequest request){
+        HttpSession session=request.getSession();
+        session.invalidate();
+        return ResultUtil.success();
+    }
 
 
 
