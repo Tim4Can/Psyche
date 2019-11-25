@@ -11,15 +11,15 @@
         :activeKey="customActiveKey"
         :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }"
       >
-        <a-tab-pane key="tab1" tab="账号密码登录">
+        <a-tab-pane key="tab1" tab="统一身份认证登录">
           <a-form-item>
             <a-input
               size="large"
               type="text"
-              placeholder="账户: 您的用户名"
+              placeholder="用户名"
               v-decorator="[
                 'username',
-                {rules: [{ required: true, message: '请输入帐户名或者邮箱' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
+                {rules: [{ required: true, message: '请输入用户名' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }" />
@@ -31,7 +31,7 @@
               size="large"
               type="password"
               autocomplete="false"
-              placeholder="密码: 您的密码，比如：admin "
+              placeholder="密码"
               v-decorator="[
                 'password',
                 {rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}
@@ -139,11 +139,20 @@ export default {
       }, 1000)
     },
     requestFailed(err) {
-      this.$notification['error']({
-        message: '错误',
-        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
-        duration: 4
-      })
+      console.log(res)
+      this.$router.push({ name: 'homepage' })
+      // 延迟 1 秒显示欢迎信息
+      setTimeout(() => {
+        this.$notification.success({
+          message: '欢迎',
+          description: `${timeFix()}，欢迎回来`
+        })
+      }, 1000)
+//      this.$notification['error']({
+//        message: '错误',
+//        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
+//        duration: 4
+//      })
     }
   }
 }

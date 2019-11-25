@@ -1,7 +1,7 @@
 <template>
   <div class="user-wrapper">
     <div class="content-box">
-      <a href="https://github.com/enginewang/front-end-DB-project" target="_blank">
+      <a href="https://github.com/Tim4Can/Psyche" target="_blank">
         <span class="action">
           <a-icon type="github"></a-icon>
         </span>
