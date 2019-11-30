@@ -1,5 +1,5 @@
 <template>
-    <page-view title="报修单" logo="/repairSheet.png">
+    <page-view title="预约" logo="/repairSheet.png">
 
     <detail-list slot="headerContent" size="small" :col="1" class="detail-layout">
       <detail-list-item term="待检修器材">{{this.details.EqId}}</detail-list-item>
@@ -13,10 +13,10 @@
         <div class="heading" span = "4">{{this.details.title}}</div>
       </a-col>
     </a-row>
-    
+
 
     <a-card :bordered='false' :gutter="24">
-        <div class="photo" > 
+        <div class="photo" >
           <a-row >
           <a-col  style="textAlign:center; margin-bottom:0px;margin-top:0px">
             <div class="heading" style="margin-bottom: 12px">
@@ -53,7 +53,7 @@
 
           <a-row>
             <a-col :span='8'>
-              <a-form-item  :validate-status="successRepair" style="textAlign:left" label="维 修 员 " :label-col="{ span: 8 }" :wrapper-col="{ span: 15 }" 
+              <a-form-item  :validate-status="successRepair" style="textAlign:left" label="维 修 员 " :label-col="{ span: 8 }" :wrapper-col="{ span: 15 }"
                >
                 <a-select :disabled="qualified"
                   style="max-width: 200px; width: 120%;"
@@ -82,8 +82,8 @@
                 </a-select>
               </a-form-item>
             </a-col>
-     
-            
+
+
             <a-col :span='9'>
               <a-form-item validate-status="success" label="数量" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }">
                 <a-input  disabled="disabled"
@@ -97,7 +97,7 @@
             <a-col :span='6' style="">
               <a-button  :disabled="qualifiedforButton" type='primary' @click="handleAddEq">添加</a-button>
             </a-col>
-      
+
             </a-row>
         </a-row>
         <a-row grid last>
@@ -112,11 +112,11 @@
                   <a-select-option v-for="ac in this.acType" :key="ac.no">
                     {{ac.type+' '+ac.model}}
                   </a-select-option>
-                
+
                 </a-select>
               </a-form-item>
             </a-col>
-      
+
             <a-col :span='9'>
               <a-form-item :validate-status="compareAc" label="数量" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }">
                 <a-input  :disabled="qualified"
@@ -143,7 +143,7 @@
                     是否完成本次调度
                 </div></a-modal>
         </div>
-        
+
         <!-- table -->
         <a-table :columns="columns"   :dataSource="this.result.ls"  bordered>
           <template
@@ -155,14 +155,14 @@
               {{ text }}
             </div>
           </template>
-         
-          
+
+
         </a-table>
         <!-- table end -->
-       
+
       </a-card>
-      
-    
+
+
     </page-view>
 
 </template>
@@ -216,7 +216,7 @@ export default {
     inject: ['reload'],
     created(){
       this.result.DSTid = this.userInfo.id
-      
+
       this.details = this.$route.params.details
       this.result.RSTid = this.details.title
       this.eqID = this.details.eqID
@@ -230,13 +230,13 @@ export default {
         console.log("acType",this.acType)
         console.log("acType",this.stfList)
       })
-        
+
     },
     name: 'repairSheetDetail',
     components: {
       ACol,
     PageView,
-    
+
     DetailList,
     DetailListItem
   },
@@ -319,25 +319,25 @@ export default {
     },
     maxEqNum:function(){
       if(this.tempEq === ''){
-        return 
+        return
       }
       var tempEqSelect = parseInt(this.tempEq)
       var tempEqNum = this.eqType[tempEqSelect].number
       console.log("maxNum",tempEqNum)
       return tempEqNum
       //let temp = this.eqType[this.tempEq-'0'].number-'0'
-      
+
     },
     maxAcNum:function(){
       if(this.tempAc === ''){
-        return 
+        return
       }
       var tempAcSelect = parseInt(this.tempAc)
       var tempAcNum = this.acType[tempAcSelect].number
       console.log("maxNum",tempAcNum)
       return tempAcNum
       //let temp = this.eqType[this.tempEq-'0'].number-'0'
-      
+
     },
     compare:function(){
       if(this.tempEq === ''){
@@ -361,7 +361,7 @@ export default {
       }
       return "error"
       //let temp = this.eqType[this.tempEq-'0'].number-'0'
-      
+
     },
     compareAc:function(){
       if(this.tempAc === ''){
@@ -385,7 +385,7 @@ export default {
       }
       return "error"
       //let temp = this.eqType[this.tempEq-'0'].number-'0'
-      
+
     },
     text:function(){
       if(this.tempEq !== ''){
@@ -425,10 +425,10 @@ export default {
         return "disabled"
       }
   },
-  }, 
+  },
   methods:{
     handleOK(){
-      
+
       this.visible = false
       this.result.stfId = "ST"+this.result.stfId
       console.log("this.result.stfId",this.result.stfId)

@@ -143,7 +143,7 @@
                   <a-card hoverable>
                     <img
                       alt="巡检单预览"
-                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562593181/xunjiandan.png"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562593181/baoxiudan.png"
                       slot="cover"
                     />
                     <router-link :to="{name: 'checkSheet'}" active-class="active">

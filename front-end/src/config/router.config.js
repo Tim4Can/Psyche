@@ -24,7 +24,7 @@ export const asyncRouterMap = [
         redirect: '/warehouse/preview',
         component: RouteView,
         meta: {
-          title: '仓库', keepAlive: true, icon: 'home'
+          title: '树洞', keepAlive: true, icon: 'home'
         },
         children: [
           {
@@ -32,7 +32,7 @@ export const asyncRouterMap = [
             name: 'Preview',
             component: () => import( '@/views/warehouse/WarehousePreview' ),
             meta: {
-              title: '预览', keepAlive: false, icon: 'search'
+              title: '帖子', keepAlive: false, icon: 'search'
             }
           },
           {
@@ -41,7 +41,7 @@ export const asyncRouterMap = [
             hidden: true,
             component: () => import( '@/views/warehouse/WarehouseDetail' ),
             meta: {
-              title: '详细', keepAlive: false
+              title: '详情', keepAlive: false
             }
           },
           {
@@ -110,25 +110,26 @@ export const asyncRouterMap = [
         name: 'sheets',
         redirect: '/sheets/workSheet',
         component: RouteView,
-        meta: {title: '表单', keepAlive: true, icon: "table"},
+        meta: {title: '线上预约', keepAlive: true, icon: "table"},
         children: [
           {
             path: '/sheets/repairSheet',
             name: 'repairSheet',
             component: () => import( '@/views/sheets/repairSheet' ),
-            meta: {title: '报修单', keepAlive: false, icon: 'exception'}
+            meta: {title: '老师信息', keepAlive: false, icon: 'exception'}
           },
           {
             path: '/sheets/checkSheet',
             name: 'checkSheet',
+            //hidden: true,
             component: () => import( '@/views/sheets/checkSheet' ),
-            meta: {title: '巡检单', keepAlive: false, icon: 'copy'}
+            meta: {title: '老师详情', keepAlive: false, icon: 'copy'}
           },
           {
             path: '/sheets/workSheet',
             name: 'workSheet',
             component: () => import( '@/views/sheets/workSheet' ),
-            meta: {title: '工单', keepAlive: false, icon: 'snippets'}
+            meta: {title: '我的预约', keepAlive: false, icon: 'snippets'}
           },
           {
             path: '/sheets/components/:details',

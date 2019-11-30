@@ -1,104 +1,45 @@
 <template>
-  <page-view title="巡检单管理">
+  <page-view title="老师详情">
     <div>
-      <div>
-        <a-form class="ant-advanced-search-form" :form="form">
-          <a-row :gutter="24">
-            <a-col :md="8" :sm="24">
-              <a-form-item label="巡检单单号">
-                <a-input placeholder="请输入巡检单单号" v-model="input"/>
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row :gutter='24'>
-            <a-col :md="8" :sm="24" :lg='10'>
-              <a-form-item label="根据编号查找巡检员">
-                <a-input placeholder="请输入巡检员编号" v-model="input2"/>
-              </a-form-item>
-            </a-col>
+          <template>
+          <a-row :gutter="16">
+             <a-col :span="8">
+              <a-card hoverable style="width: 260px">
+                <img
+                     alt="example"
+                     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                     slot="cover"
+                />
 
-            <a-col :md="8" :sm="24" :lg='10'>
-              <a-form-item label="根据姓名查找巡检员">
-                <a-input placeholder="请输入巡检员姓名" v-model="input3"/>
-              </a-form-item>
-            </a-col>
-
-          </a-row>
-          <a-row>
-            <a-col :span="4" style=" textAlign: 'left';margin-bottom: 24px">
-              <a-button
-                size="large"
-                class="button"
-                type="primary"
-                @click="onClickRefresh"
-              >刷新表单
-              </a-button>
-            </a-col>
-          </a-row>
-        </a-form>
-      </div>
-      <!-- table -->
-      <a-card>
-        <a-table :columns="columns" :dataSource="DataShow" rowKey='id' bordered>
-          <template
-            v-for="col in ['id','potrolID', '','eqID','checkTime','checkArea']"
-            :slot="col"
-            slot-scope="text"
-          >
-            <div :key="col">
-              {{ text }}
-            </div>
-          </template>
-          <template slot="checkPic" slot-scope="text">
-            <!--<div>
-              <a-avatar slot="avatar" size="large" shape="square" :src="text"/>
-            </div>-->
-            <div id="app">
-              <div class="">
-                <div
-                  class="pic"
-                  @click="() => showImg(text)"
-                >
-                  <a-avatar :src="text"/>
-                </div>
+                <a-card-meta title="李一" description="被看见、被听见、被理解、被接受。">
+                <a-avatar
+                   slot="avatar"
+                   src="/avatar2.jpg"
+                />
+                </a-card-meta>
+              </a-card>
+             </a-col>
+             <a-col>
+              <div>
+              <p>基本信息</p>
+              <li>国家一级咨询师</li>
+              <li> 国际催眠治疗师</li>
+              <li> 央视极速少年专家</li>
+              <li> 欧文亚隆团体咨询师</li>
               </div>
-              <vue-easy-lightbox
-                :visible="visible"
-                :imgs="src"
-                @hide="handleHide"
-              ></vue-easy-lightbox>
-            </div>
+              <br/>
+              <p>选择预约时间</P>
+              <template>
+                <a-cascader :options="options" @change="onChange" />
+              </template>
+             </a-col>
+           </a-row>
           </template>
-          <template slot="operation" slot-scope="text, record">
-            <div class="button">
-              <a-button
-                size="small"
-                type="danger"
-                @click="onClickDelete(record.id)"
-              >删除
-              </a-button>
-              <a-modal
-                title="确认删除"
-                v-model="visible2"
-                @ok="onClickDeleteRow"
-              >
-                <div class="modal">
-                  是否删除本条记录
-                </div>
-              </a-modal>
-            </div>
-          </template>
-        </a-table>
-      </a-card>
-      <!-- table end -->
-      <!-- add bar -->
-      <!-- add bar end -->
     </div>
   </page-view>
 </template>
 
 <script>
-import { getCheckSheet, deleteCheckSheetRow } from '@/api/sheets'
 import Vue from 'vue'
 import Fuse from 'fuse.js'
 import Lightbox from 'vue-easy-lightbox'
@@ -106,179 +47,131 @@ import { PageView } from '@/layouts'
 
 Vue.use(Lightbox)
 
-const columns = [{
-  title: '巡检单单号',
-  dataIndex: 'id',
-  align: 'center',
-  sorter: (a, b) => a.id > b.id,
-}, {
-  title: '巡检员编号',
-  dataIndex: 'potrolID',
-  align: 'center',
-  sorter: (a, b) => a.potrolID > b.potrolID,
-}, {
-  title: '巡检员姓名',
-  dataIndex: 'potrolName',
-  align: 'center',
-  sorter: (a, b) => a.potrolID > b.potrolID,
-},{
-  title: '巡检器材编号',
-  dataIndex: 'eqID',
-  align: 'center',
-  sorter: (a, b) => a.eqID > b.eqID,
-}, {
-  title: '巡检时间',
-  dataIndex: 'checkTime',
-  align: 'center',
-  sorter: (a, b) => a.checkTime > b.checkTime
-},{
-  title: '巡检地区',
-  align: 'center',
-  dataIndex: 'checkArea',
-},{
-  title: '巡检结果图片',
-  align: 'center',
-  dataIndex: 'checkPic',
-  scopedSlots: { customRender: 'checkPic' }
-},{
-  titile: '操作',
-  align: 'center',
-  dataIndex: 'operation',
-  scopedSlots: { customRender: 'operation' }
-}];
-
-const Data = []
-const DataShow = []
-
 export default {
   components: {
     PageView
   },
-  inject: ['reload'],
   data() {
-    this.cacheData = Data.map(item => ({ ...item }))
-    return {
-      Data,
-      DataShow,
-      input: '',
-      input2: '',
-      input3: '',
-      columns,
-      visible: false,
-      visible2: false,
-      src: "",
-      deleteInfo:'',
-      isRouterAlive: true,
-      todelete:'',
-      form: this.$form.createForm(this)
-    }
-  },
-  watch:{
-      input(pattern){
-          if(pattern == ''){
-              this.DataShow = this.Data
-          }
-          else{
-              const option = {
-                  keys: ['id'],
-                  threshold: 0.1
-              }
-              var fuse = new Fuse(this.Data,option)
-              this.DataShow = fuse.search(pattern)
-          }
+      return {
+        options: [
+          {
+            value: '周一',
+            label: '周一',
+            children: [
+                  {
+                    value: '9:00~10:00',
+                    label: '9:00~10:00',
+                  },
+                  {
+                    value: '11:00~12:00',
+                    label: '11:00~12:00',
+                  },
+                  {
+                    value: '14:00~15:00',
+                    label: '14:00~15:00',
+                  },
+                  {
+                    value: '16:00~17:00',
+                    label: '16:00~17:00',
+                  },
+                ],
+          },
+          {
+            value: '周二',
+            label: '周二',
+            children: [
+                  {
+                    value: '9:00~10:00',
+                    label: '9:00~10:00',
+                  },
+                  {
+                    value: '11:00~12:00',
+                    label: '11:00~12:00',
+                  },
+                  {
+                    value: '14:00~15:00',
+                    label: '14:00~15:00',
+                  },
+                  {
+                    value: '16:00~17:00',
+                    label: '16:00~17:00',
+                  },
+                ],
+          },
+          {
+            value: '周三',
+            label: '周三',
+            children: [
+                  {
+                    value: '9:00~10:00',
+                    label: '9:00~10:00',
+                  },
+                  {
+                    value: '11:00~12:00',
+                    label: '11:00~12:00',
+                  },
+                  {
+                    value: '14:00~15:00',
+                    label: '14:00~15:00',
+                  },
+                  {
+                    value: '16:00~17:00',
+                    label: '16:00~17:00',
+                  },
+                ],
+          },
+          {
+            value: '周四',
+            label: '周四',
+            children: [
+                  {
+                    value: '9:00~10:00',
+                    label: '9:00~10:00',
+                  },
+                  {
+                    value: '11:00~12:00',
+                    label: '11:00~12:00',
+                  },
+                  {
+                    value: '14:00~15:00',
+                    label: '14:00~15:00',
+                  },
+                  {
+                    value: '16:00~17:00',
+                    label: '16:00~17:00',
+                  },
+                ],
+          },
+          {
+            value: '周五',
+            label: '周五',
+            children: [
+                  {
+                    value: '9:00~10:00',
+                    label: '9:00~10:00',
+                  },
+                  {
+                    value: '11:00~12:00',
+                    label: '11:00~12:00',
+                  },
+                  {
+                    value: '14:00~15:00',
+                    label: '14:00~15:00',
+                  },
+                  {
+                    value: '16:00~17:00',
+                    label: '16:00~17:00',
+                  },
+                ],
+          },
+        ],
+      };
+    },
+    methods: {
+      onChange(value) {
+        console.log(value);
       },
-      input2(pattern){
-          if(pattern == ''){
-              this.DataShow = this.Data
-          }
-          else{
-              const option = {
-                  keys: ['potrolID'],
-                  threshold: 0.1
-              }
-              var fuse = new Fuse(this.Data,option)
-              this.DataShow = fuse.search(pattern)
-          }
-      },
-      input3(pattern){
-          if(pattern == ''){
-              this.DataShow = this.Data
-          }
-          else{
-              const option = {
-                  keys: ['potrolName'],
-                  threshold: 0.1
-              }
-              var fuse = new Fuse(this.Data,option)
-              this.DataShow = fuse.search(pattern)
-          }
-      }
-  },
-  computed:{
-
-  },
-  methods: {
-    showImg (text) {
-        this.visible = true
-        this.src = text
-      },
-    //select
-    handleHide () {
-      this.visible = false
     },
-
-    onClickRefresh(){
-      this.reload()
-    },
-    //delete
-    onClickDelete (id) {
-      this.todelete = id
-      this.visible2 = true;
-    },
-    handleOK(e){
-        this.visible2 = false;
-        //to be completed
-    },
-    onClickDeleteRow () {
-      this.visible2 = false;
-      const newData = [...this.DataShow]
-      console.log(newData)
-      const target = newData.filter(item => this.todelete === item.id)[0]
-      console.log(target)
-      deleteCheckSheetRow({ id : target.id}).then((response) => {
-        this.deleteInfo = response.info
-        console.log('delete', this.deleteInfo)
-        if(this.deleteInfo !== 'fail'){
-          this.Data = [...response.data]
-          this.DataShow = this.Data
-          
-        }
-        if(this.deleteInfo === 'ok'){
-          this.$notification.open({
-          message: '删除成功',
-          description: '本条巡检单记录删除成功',
-          icon: <a-icon type="check" style="color: #108ee9" />,
-        })
-        }
-        else{
-          this.$notification.open({
-          message: '删除失败',
-          description: '本条巡检单记录删除失败',
-          icon: <a-icon type="warning" style="color: #108ee9" />,
-        })
-        }
-      })
-      // to be complete
-    },
-  },
-  mounted () {
-    getCheckSheet().then((response) => {
-      console.log(...response.data)
-      this.Data = [...response.data]
-      this.DataShow = this.Data
-    })
-  }
-
 }
 
 </script>
