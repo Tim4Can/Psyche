@@ -145,19 +145,10 @@ export const asyncRouterMap = [
 
       // staff
       {
-        path: '/staff',
-        name: 'staff',
-        redirect: '/staff/staffManage',
-        component: RouteView,
-        meta: {title: '员工', keepAlive: true, icon: "team", permission: ['super']},
-        children: [
-          {
-            path: '/staff/staffManage',
-            name: 'staffManage',
-            component: () => import( '@/views/staff/staffManage' ),
-            meta: {title: '员工管理', keepAlive: false, icon: 'check-circle', permission: ['super']}
-          }
-        ]
+        path: '/staff/staffManage',
+        name: 'staffManage',
+        component: () => import( '@/views/staff/staffManage' ),
+        meta: {title: '个人中心', keepAlive: true, icon: 'user'}
       },
       {
         path: '/server',
@@ -207,7 +198,7 @@ export const constantRouterMap = [
       {
         path: 'login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login' )
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Homepage' )
       }
     ]
   },
