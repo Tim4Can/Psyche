@@ -21,14 +21,14 @@
              </a-col>
              <a-col>
               <div>
-              <p>基本信息</p>
+              <h1>基本信息</h1>
               <li>国家一级咨询师</li>
               <li> 国际催眠治疗师</li>
               <li> 央视极速少年专家</li>
               <li> 欧文亚隆团体咨询师</li>
               </div>
               <br/>
-              <p>选择预约时间</P>
+              <h2>选择预约时间</h2>
               <template>
                 <a-cascader :options="options" @change="onChange" />
               </template>

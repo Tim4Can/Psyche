@@ -38,7 +38,7 @@ export const asyncRouterMap = [
           {
             path: '/warehouse/detail/:id',
             name: 'Detail',
-            hidden: true,
+            //hidden: true,
             component: () => import( '@/views/warehouse/WarehouseDetail' ),
             meta: {
               title: '详情', keepAlive: false
@@ -47,6 +47,7 @@ export const asyncRouterMap = [
           {
             path: '/warehouse/map',
             name: 'Map',
+            hidden: true,
             component: () => import( '@/views/warehouse/Map' ),
             meta: {title: '地图', keepAlive: false, icon: 'picture'}
           }
@@ -198,7 +199,7 @@ export const constantRouterMap = [
       {
         path: 'login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Homepage' )
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login' )
       }
     ]
   },

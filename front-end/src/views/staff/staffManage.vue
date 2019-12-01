@@ -15,7 +15,56 @@
                    <div>昵称：yiyi</div>
               </a-card>
               <br/>
-              <a-button type="primary">修改密码</a-button>
+              <template>
+                <div>
+                  <a-button type="primary" @click="modifyPassButton">
+                    修改密码
+                  </a-button>
+                </div>
+                <div v-show="showPasswordForm" footer="">
+                <a-form title="修改密码" @submit="handleSubmit" :form="form">
+                  <a-form-item
+                    :wrapperCol="{ span: 24 }"
+                    style="text-align: center"
+                  >
+                  </a-form-item>
+                  <a-form-item
+                    label="旧密码"
+                    :labelCol="{lg: {span: 7}, sm: {span: 7}}"
+                    :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
+                    <a-input
+                      type="password"
+                      v-decorator="[
+            'old_password',
+            {rules: [{ required: true, message: '请输入旧的密码' }]}
+          ]"
+                      name="old_password"
+                      placeholder="请输入旧的密码"/>
+                  </a-form-item>
+                  <a-form-item
+                    label="新密码"
+                    :labelCol="{lg: {span: 7}, sm: {span: 7}}"
+                    :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
+                    <a-input
+                      type="password"
+                      v-decorator="[
+            'new_password',
+            {rules: [{ required: true, message: '请输入新的密码' }]}
+          ]"
+                      name="new_password"
+                      placeholder="请输入新的密码"/>
+                  </a-form-item>
+                  <a-form-item
+                    :wrapperCol="{ span: 24 }"
+                    style="text-align: center"
+                  >
+                    <a-button htmlType="submit" type="primary">提交</a-button>
+                    <a-button style="margin-left: 8px" @click="cancelModifyPassword">取消</a-button>
+                  </a-form-item>
+                </a-form>
+                </div>
+              </template>
+              </col>
              </a-col>
              <a-col :span="8">
               <div>
@@ -61,11 +110,17 @@
 <script>
 import { STable } from '@/components'
 import { PageView } from '@/layouts'
-import { getStaffSheet, deleteStaffSheetRow, modifyStaffSheetRow, addStaffSheetRow } from '@/api/staff'
 import Fuse from 'fuse.js'
 import md5 from 'md5'
 import ARow from "ant-design-vue/es/grid/Row";
 import ACol from "ant-design-vue/es/grid/Col";
+import {timeFix} from '@/utils/util'
+import {mapGetters} from 'vuex'
+import {Button} from 'ant-design-vue'
+import HeadInfo from '@/components/tools/HeadInfo'
+import {Radar} from '@/components'
+import {getRoleList, getServiceList, modifyPassword} from '@/api/manage'
+import AFormItem from "ant-design-vue/es/form/FormItem";
 
 const data = [
     {
@@ -83,15 +138,26 @@ const data = [
   ];
 export default {
   components: {
+    AFormItem,
     ACol,
     ARow,
     PageView,
-    STable
+    Radar,
+    STable,
   },
   data () {
     return {
       data,
+      showPasswordForm: false,
     }
+  },
+  methods: {
+      modifyPassButton() {
+        this.showPasswordForm = true;
+      },
+      cancelModifyPassword() {
+        this.showPasswordForm = false;
+      },
   },
 }
 </script>
