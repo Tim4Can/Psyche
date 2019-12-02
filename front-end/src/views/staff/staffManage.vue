@@ -124,7 +124,7 @@ import AFormItem from "ant-design-vue/es/form/FormItem";
 
 const data = [
     {
-      title: '阳光明媚的周五。',
+      title: '阳光明媚的周一。',
     },
     {
       title: '今天也是元气满满的一天呢！',

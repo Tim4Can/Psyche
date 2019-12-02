@@ -14,7 +14,7 @@ export const asyncRouterMap = [
       {
         path: '/homepage',
         name: 'homepage',
-        meta: {title: '个人中心', keepAlive: true, icon: 'user'},
+        meta: {title: '首页', keepAlive: true, icon: 'home'},
         component: () => import( '@/views/user/Homepage' ),
       },
       // warehouse
@@ -23,25 +23,23 @@ export const asyncRouterMap = [
         name: 'warehouse',
         redirect: '/warehouse/preview',
         component: RouteView,
-        meta: {
-          title: '树洞', keepAlive: true, icon: 'home'
-        },
+        meta: {title: '树洞', keepAlive: true, icon: chat},
         children: [
           {
             path: '/warehouse/preview',
             name: 'Preview',
             component: () => import( '@/views/warehouse/WarehousePreview' ),
             meta: {
-              title: '帖子', keepAlive: false, icon: 'search'
+              title: '帖子', keepAlive: false, icon: 'exception'
             }
           },
           {
-            path: '/warehouse/detail/:id',
+            path: '/warehouse/detail',
             name: 'Detail',
             //hidden: true,
             component: () => import( '@/views/warehouse/WarehouseDetail' ),
             meta: {
-              title: '详情', keepAlive: false
+              title: '详情', keepAlive: false,icon: 'copy'
             }
           },
           {
@@ -57,6 +55,7 @@ export const asyncRouterMap = [
       {
         path: '/equipment',
         name: 'equipment',
+        hidden: true,
         redirect: '/equipment/preview',
         meta: {title: '器材', keepAlive: true, icon: 'sliders'},
         component: RouteView,
@@ -92,6 +91,7 @@ export const asyncRouterMap = [
       {
         path: '/accessory',
         name: 'accessory',
+        hidden: true,
         meta: {title: '配件', keepAlive: true, icon: 'tool'},
         component: RouteView,
         children: [
@@ -154,6 +154,7 @@ export const asyncRouterMap = [
       {
         path: '/server',
         name: 'server',
+        hidden: true,
         redirect: '/server/KibanaMonitor',
         component: RouteView,
         meta: {title: '服务器', keepAlive: true, icon: bxAnaalyse},
@@ -175,6 +176,7 @@ export const asyncRouterMap = [
       {
         path: '/chat',
         name: 'chat',
+        hidden: true,
         component: () => import( '@/views/chat/Rocket'),
         meta: {title: '聊天', keepAlive: true, icon: chat},
       }

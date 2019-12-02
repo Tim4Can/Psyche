@@ -2,7 +2,7 @@
   <page-view :avatar="avatar" :title="false">
     <div slot="headerContent">
       <div class="title">{{ timeFix }}，{{ user.name }}！</div>
-      <div>{{userInfo.role.name}} | Psyche - 校园心理咨询平台</div>
+      <div>{{userInfo.role.name}} | Eport - 健身器材管理平台</div>
     </div>
     <!--顶层右侧栏
         <div slot="extra">
@@ -21,6 +21,164 @@
     -->
     <div>
       <a-row :gutter="24">
+        <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
+          <!--调度管理-->
+          <a-card
+            style="margin-bottom: 24px; margin-top: 0px"
+            :bordered="false"
+            title="调度管理"
+            :body-style="{ padding: 0 }">
+            <!--调度卡片-->
+            <a-card>
+              <a-row :gutter="24">
+                <a-col :md="24" :lg="6">
+                  <a-card hoverable>
+                    <img
+                      alt="仓库预览"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562590986/warehouse.png"
+                      slot="cover"
+                    />
+                    <router-link :to="{name: 'Preview'}" active-class="active">
+                      <a-card-meta
+                        title="仓库预览"
+                        description="点击预览仓库信息">
+                      </a-card-meta>
+                    </router-link>
+                  </a-card>
+                </a-col>
+                <a-col :md="24" :lg="6">
+                  <a-card hoverable>
+                    <img
+                      alt="配件管理"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562677458/pj.png"
+                      slot="cover"
+                    />
+                    <router-link :to="{name: 'AccessoryInWarehouse'}" active-class="active">
+                      <a-card-meta
+                        title="配件管理"
+                        description="点击管理器材配件">
+                      </a-card-meta>
+                    </router-link>
+                  </a-card>
+                </a-col>
+                <a-col :md="24" :lg="6">
+                  <a-card hoverable>
+                    <img
+                      alt="仓储器材"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562593108/equipment.png"
+                      slot="cover"
+                    />
+                    <router-link :to="{name: 'EquipPreview'}" active-class="active">
+                      <a-card-meta
+                        title="仓储器材"
+                        description="点击预览仓储器材">
+                      </a-card-meta>
+                    </router-link>
+                  </a-card>
+                </a-col>
+                <a-col :md="24" :lg="6">
+                  <a-card hoverable>
+                    <img
+                      alt="在用器材"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562593722/equipmentUsing.png"
+                      slot="cover"
+                    />
+                    <router-link :to="{name: 'EquipUsing'}" active-class="active">
+                      <a-card-meta
+                        title="在用器材"
+                        description="点击查询在用器材">
+                      </a-card-meta>
+                    </router-link>
+                  </a-card>
+                </a-col>
+              </a-row>
+              <br/>
+              <a-row :gutter="24">
+                <a-col :md="24" :lg="6">
+                  <a-card hoverable>
+                    <img
+                      alt="仓库地图"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562593159/map.png"
+                      slot="cover"
+                    />
+                    <router-link :to="{name: 'Map'}" active-class="active">
+                      <a-card-meta
+                        title="仓库地图"
+                        description="点击查看仓库地图">
+                      </a-card-meta>
+                    </router-link>
+                  </a-card>
+                </a-col>
+                <a-col :md="24" :lg="6">
+                  <a-card hoverable>
+                    <img
+                      alt="工单预览"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562593143/gongdan.png"
+                      slot="cover"
+                    />
+                    <router-link :to="{name: 'workSheet'}" active-class="active">
+                      <a-card-meta
+                        title="工单预览"
+                        description="点击预览工单信息">
+                      </a-card-meta>
+                    </router-link>
+                  </a-card>
+                </a-col>
+                <a-col :md="24" :lg="6">
+                  <a-card hoverable>
+                    <img
+                      alt="报修单预览"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562593110/baoxiudan.png"
+                      slot="cover"
+                    />
+                    <router-link :to="{name: 'repairSheet'}" active-class="active">
+                      <a-card-meta
+                        title="报修单预览"
+                        description="点击预览报修单信息">
+                      </a-card-meta>
+                    </router-link>
+                  </a-card>
+                </a-col>
+                <a-col :md="24" :lg="6">
+                  <a-card hoverable>
+                    <img
+                      alt="巡检单预览"
+                      src="https://res.cloudinary.com/dbmkzs2ez/image/upload/v1562593181/xunjiandan.png"
+                      slot="cover"
+                    />
+                    <router-link :to="{name: 'checkSheet'}" active-class="active">
+                      <a-card-meta
+                        title="巡检单预览"
+                        description="点击预览巡检单信息">
+                      </a-card-meta>
+                    </router-link>
+                  </a-card>
+                </a-col>
+              </a-row>
+            </a-card>
+          </a-card>
+
+          <!--动态
+                    <a-card :loading="loading" title="动态" :bordered="false">
+            <a-list>
+              <a-list-item :key="index" v-for="(item, index) in activities">
+                <a-list-item-meta>
+                  <a-avatar slot="avatar" :src="item.user.avatar"/>
+                  <div slot="title">
+                    <span>{{ item.user.nickname }}</span>&nbsp;
+                    在&nbsp;<a href="#">{{ item.project.name }}</a>&nbsp;
+                    <span>{{ item.project.action }}</span>&nbsp;
+                    <a href="#">{{ item.project.event }}</a>
+                  </div>
+                  <div slot="description">{{ item.time }}</div>
+                </a-list-item-meta>
+              </a-list-item>
+            </a-list>
+          </a-card>
+
+          -->
+        </a-col>
+
         <!--个人信息-->
         <a-col
           style="padding: 0 12px"
