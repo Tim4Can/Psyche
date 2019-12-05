@@ -1,22 +1,29 @@
 <template>
   <page-view title="全部帖子">
-    <div>
       <template>
-      <a-card>
-        <a-list itemLayout="horizontal" :dataSource="data">
-          <a-list-item slot="renderItem" slot-scope="item, index">
-            <a-list-item-meta description='Psyche'>
-              <a slot="title" href="https://vue.ant.design/">{{item.title}}</a>
-              <a-avatar
-                slot="avatar"
-                src="/avatar2.jpg"
-              />
-            </a-list-item-meta>
-          </a-list-item>
+        <a-card title="全部">
+          <a-list :pagination="pagination">
+        <a-list-item>
+        <a-card :bordered="false" style="width:100%">
+          <a-card-meta title="阳光明媚的周一。" description="周一要上课了呀。">
+          </a-card-meta>
+          </a-card>
+        </a-list-item>
+        <a-list-item>
+        <a-card :bordered="false" style="width:100%">
+          <a-card-meta title="感恩节快乐！" description="感谢这个世界，感谢你！">
+          </a-card-meta>
+          </a-card>
+        </a-list-item>
+        <a-list-item>
+          <a-card :bordered="false" style="width:100%">
+          <a-card-meta title="快要期末考试了" description="好好复习，好好考试，挺过这个月。">
+          </a-card-meta>
+          </a-card>
+        </a-list-item>
         </a-list>
-      </a-card>
+        </a-card>
       </template>
-    </div>
   </page-view>
 </template>
 
@@ -27,27 +34,19 @@ import Lightbox from 'vue-easy-lightbox'
 import { PageView } from '@/layouts'
 
 Vue.use(Lightbox)
-const data = [
-    {
-      title: '阳光明媚的周一。',
-    },
-    {
-      title: '啦啦啦~',
-    },
-    {
-      title: '感恩节快乐！',
-    },
-    {
-      title: '初冬没有下雪。。。',
-    },
-  ];
+
   export default {
     components: {
         PageView
     },
     data() {
       return {
-        data,
+         pagination: {
+          onChange: page => {
+            console.log(page);
+          },
+          pageSize: 3,
+        },
       };
     },
   };

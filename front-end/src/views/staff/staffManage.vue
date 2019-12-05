@@ -1,27 +1,21 @@
 <template>
   <page-view title="个人中心">
-    <div>
-          <template>
-          <a-row :gutter="16">
-             <a-col :span="8">
-              <a-card hoverable style="width: 260px">
-                <a-card-meta title="175001 林一" description="人类存在的目的，是在纯粹存在的黑暗中燃起一点光亮。">
-                <a-avatar
-                   slot="avatar"
-                   src="/avatar2.jpg"
-                />
-                </a-card-meta>
-                <br/>
-                   <div>昵称：yiyi</div>
-              </a-card>
-              <br/>
-              <template>
-                <div>
-                  <a-button type="primary" @click="modifyPassButton">
-                    修改密码
-                  </a-button>
-                </div>
-                <div v-show="showPasswordForm" footer="">
+    <template>
+      <div>
+        <a-card style="width:300px">
+        <a-table :columns="columns" :dataSource="data" :pagination="false">
+          <span slot="customTitle"><a-avatar src="/avatar2.jpg" /> 学号</span>
+        </a-table>
+        <br/>
+        <div>
+            <a-button type="primary" @click="showModal">修改密码</a-button>
+            <a-modal
+              title="修改密码"
+              :visible="visible"
+              @ok="handleOk"
+              :confirmLoading="confirmLoading"
+              @cancel="handleCancel"
+            >
                 <a-form title="修改密码" @submit="handleSubmit" :form="form">
                   <a-form-item
                     :wrapperCol="{ span: 24 }"
@@ -54,56 +48,80 @@
                       name="new_password"
                       placeholder="请输入新的密码"/>
                   </a-form-item>
-                  <a-form-item
-                    :wrapperCol="{ span: 24 }"
-                    style="text-align: center"
-                  >
-                    <a-button htmlType="submit" type="primary">提交</a-button>
-                    <a-button style="margin-left: 8px" @click="cancelModifyPassword">取消</a-button>
+                   <a-form-item
+                    label="新密码"
+                    :labelCol="{lg: {span: 7}, sm: {span: 7}}"
+                    :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
+                    <a-input
+                      type="password"
+                      v-decorator="[
+            'new_password',
+            {rules: [{ required: true, message: '请输入新的密码' }]}
+          ]"
+                      name="new_password"
+                      placeholder="请再次输入新的密码"/>
                   </a-form-item>
                 </a-form>
-                </div>
-              </template>
-              </col>
-             </a-col>
-             <a-col :span="8">
-              <div>
-              <div>发帖</div>
-              <template>
-                <a-list itemLayout="horizontal" :dataSource="data">
-                  <a-list-item slot="renderItem" slot-scope="item, index">
-                    <a-list-item-meta
-                      description="几天前"
-                    >
-                      <a slot="title" href="https://vue.ant.design/">{{item.title}}</a>
-                      <a-avatar
-                        slot="avatar"
-                        src="/avatar2.jpg"
-                      />
-                    </a-list-item-meta>
-                  </a-list-item>
-                </a-list>
-              </template>
-              </div>
-             </a-col>
-             <a-col :span="8">
-              <div>
-              <div>收藏的文章</div>
-              <template>
-                <a-card hoverable style="width: 260px">
-                <a-card-meta title="做个吃瓜群众没什么不好" description="八卦可能比我们想的更复杂、更具有社会重要性。">
-                </a-card-meta>
-                </a-card>
-                <a-card hoverable style="width: 260px">
-                <a-card-meta title="自卑，是带刺的" description="你以为自卑只是自己的事，其实它伤害了很多人。">
-                </a-card-meta>
-                </a-card>
-              </template>
-              </div>
-             </a-col>
-           </a-row>
-          </template>
-    </div>
+            </a-modal>
+          </div>
+        </a-card>
+        <br /><br />
+        <a-card
+          style="width:100%"
+          :tabList="tabListNoTitle"
+          :activeTabKey="noTitleKey"
+          @tabChange="key => onTabChange(key, 'noTitleKey')"
+        >
+        <template v-if="noTitleKey === '发帖'">
+        <a-list :pagination="pagination">
+        <a-list-item>
+        <a-card :bordered="false" style="width:100%">
+          <a-card-meta title="阳光明媚的周一。" description="周一要上课了呀。">
+          </a-card-meta>
+          </a-card>
+        </a-list-item>
+        <a-list-item>
+        <a-card :bordered="false" style="width:100%">
+          <a-card-meta title="感恩节快乐！" description="感谢这个世界，感谢你！">
+          </a-card-meta>
+          </a-card>
+        </a-list-item>
+        <a-list-item>
+          <a-card :bordered="false" style="width:100%">
+          <a-card-meta title="快要期末考试了" description="好好复习，好好考试，挺过这个月。">
+          </a-card-meta>
+          </a-card>
+        </a-list-item>
+        </a-list>
+        </template>
+      <template v-else="noTitleKey === '收藏'">
+      <a-list :pagination="pagination">
+      <a-list-item>
+        <a-card :bordered="false" style="width:100%">
+        <a-card-meta title="人际关系疗法起源与应用 | the application of IPT" description="人际关系疗法（IPT，interpersonal psychotherapy）的发现纯属偶然，类似于医药研究中的老药新用的发现过程一样。">
+        <img style="width:100px"
+           slot="avatar"
+           src="/cover.jpeg"
+        />
+        </a-card-meta>
+        </a-card>
+      </a-list-item>
+      <a-list-item>
+        <a-card :bordered="false" style="width:100%">
+        <a-card-meta title="世上最深的恶意，是劝你再来一把" description="花一万能收回来的，叫投资，花完一万又一万的，只能叫败家。">
+        <img style="width:100px"
+           slot="avatar"
+           src="/grow.jpeg"
+        />
+        </a-card-meta>
+        </a-card>
+      </a-list-item>
+      </a-list>
+      </template>
+       </a-card>
+       </a-card>
+      </div>
+    </template>
   </page-view>
 </template>
 
@@ -121,45 +139,103 @@ import HeadInfo from '@/components/tools/HeadInfo'
 import {Radar} from '@/components'
 import {getRoleList, getServiceList, modifyPassword} from '@/api/manage'
 import AFormItem from "ant-design-vue/es/form/FormItem";
-
-const data = [
+const columns = [
     {
-      title: '阳光明媚的周一。',
+      dataIndex: 'number',
+      key: 'number',
+      slots: { title: 'customTitle' },
+      scopedSlots: { customRender: 'number' },
     },
     {
-      title: '今天也是元气满满的一天呢！',
+      title: '姓名',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: '再努力坚持一下！！',
-    },
-    {
-      title: '来到这儿的第一天~~~',
+      title: '昵称',
+      dataIndex: 'nickname',
+      key: 'nickname',
     },
   ];
+const data = [
+    {
+      number: 1750001,
+      name: '林一',
+      nickname: '依依',
+    },
+ ]
 export default {
-  components: {
-    AFormItem,
-    ACol,
-    ARow,
-    PageView,
-    Radar,
-    STable,
-  },
-  data () {
-    return {
-      data,
-      showPasswordForm: false,
-    }
-  },
-  methods: {
-      modifyPassButton() {
-        this.showPasswordForm = true;
+    components: {
+        AFormItem,
+        ACol,
+        ARow,
+        PageView,
+        Radar,
+        STable,
       },
-      cancelModifyPassword() {
-        this.showPasswordForm = false;
+    data() {
+      return {
+        data,
+        columns,
+        visible: false,
+        confirmLoading: false,
+        pagination: {
+          onChange: page => {
+            console.log(page);
+          },
+          pageSize: 3,
+        },
+        tabList: [
+          {
+            key: 'tab1',
+            // tab: 'tab1',
+            scopedSlots: { tab: 'customRender' },
+          },
+          {
+            key: 'tab2',
+            tab: 'tab2',
+          },
+        ],
+        contentList: {
+          tab1: 'content1',
+          tab2: 'content2',
+        },
+        tabListNoTitle: [
+          {
+            key: '发帖',
+            tab: '发帖',
+          },
+          {
+            key: '收藏',
+            tab: '收藏',
+          },
+        ],
+        key: 'tab1',
+        noTitleKey: '发帖',
+      };
+    },
+    methods: {
+      onTabChange(key, type) {
+        console.log(key, type);
+        this[type] = key;
       },
-  },
+      showModal() {
+        this.visible = true;
+      },
+      handleOk(e) {
+        this.confirmLoading = true;
+        setTimeout(() => {
+          this.visible = false;
+          this.confirmLoading = false;
+        }, 2000);
+      },
+      handleCancel(e) {
+        console.log('Clicked cancel button');
+        this.visible = false;
+      },
+    },
 }
+
 </script>
 
 <style lang="less" scoped>

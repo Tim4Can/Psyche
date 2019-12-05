@@ -1,6 +1,6 @@
 <template>
   <page-view title="我的预约">
-    <div>
+    <a-card>
       <template>
         <a-table :columns="columns" :dataSource="data">
           <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>
@@ -19,7 +19,7 @@
           </span>
         </a-table>
       </template>
-    </div>
+    </a-card>
   </page-view>
 </template>
 

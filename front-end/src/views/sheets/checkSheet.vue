@@ -1,6 +1,6 @@
 <template>
   <page-view title="老师详情">
-    <div>
+    <a-card>
           <template>
           <a-row :gutter="16">
              <a-col :span="8">
@@ -19,7 +19,7 @@
                 </a-card-meta>
               </a-card>
              </a-col>
-             <a-col>
+             <a-col :span="8">
               <div>
               <h1>基本信息</h1>
               <li>国家一级咨询师</li>
@@ -27,7 +27,8 @@
               <li> 央视极速少年专家</li>
               <li> 欧文亚隆团体咨询师</li>
               </div>
-              <br/>
+             </a-col>
+             <a-col :span="8">
               <h2>选择预约时间</h2>
               <template>
                 <a-cascader :options="options" @change="onChange" />
@@ -35,7 +36,7 @@
              </a-col>
            </a-row>
           </template>
-    </div>
+    </a-card>
   </page-view>
 </template>
 

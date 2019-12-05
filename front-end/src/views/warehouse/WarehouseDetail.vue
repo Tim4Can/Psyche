@@ -1,84 +1,42 @@
 <template>
   <page-view title="帖子详情">
     <a-card >
-  <a-comment style="height:120px;">
-    <template slot="actions">
-      <span>
-        <a-tooltip title="Like">
-          <a-icon type="like" :theme="action === 'liked' ? 'filled' : 'outlined'" @click="like" />
-        </a-tooltip>
-        <span style="padding-left: '8px';cursor: 'auto'">
-          {{likes}}
-        </span>
-      </span>
-      <span>
-        <a-tooltip title="Dislike">
-          <a-icon
-            type="dislike"
-            :theme="action === 'disliked' ? 'filled' : 'outlined'"
-            @click="dislike"
-          />
-        </a-tooltip>
-        <span style="padding-left: '8px';cursor: 'auto'">
-          {{dislikes}}
-        </span>
-      </span>
-      <span>Reply to</span>
-    </template>
-    <a slot="author">林一</a>
-    <a-avatar
-      src="/avatar2.jpg"
-      alt="林一"
-      slot="avatar"
-    />
-    <p slot="content">
-      阳光明媚的周一。
-    </p>
-    <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
-      <span>{{moment().fromNow()}}</span>
-    </a-tooltip>
-  </a-comment>
-</a-card>
-      <a-list size="small" bordered :dataSource="data"
+      <h3>阳光明媚的周一。</h3>
+    </a-card>
+    <a-card style="width:100%">
+        <a-card-meta title="周一要上课了呀。">
+        <img style="width:60px"
+           slot="avatar"
+           src="/avatar2.jpg"
+        />
+        </a-card-meta>
+        <p>楼主</P>
+    </a-card>
+    <template>
+    <a-card style="top:10px">
+      <a-list bordered :dataSource="data"
           class="comment-list"
           :header="`${data.length} replies`"
           itemLayout="horizontal"
         >
           <a-list-item slot="renderItem" slot-scope="item, index">
             <a-comment :author="item.author" :avatar="item.avatar">
-              <template slot="actions">
-                <span v-for="action in item.actions">{{action}}</span>
-              </template>
               <p slot="content">{{item.content}}</p>
+              <p>{{item.index}}楼</p>
               <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
                 <span>{{item.datetime.fromNow()}}</span>
               </a-tooltip>
             </a-comment>
           </a-list-item>
         </a-list>
+     </a-card>
+    </template>
     <template>
       <div>
-        <a-list
-          v-if="comments.length"
-          :dataSource="comments"
-          :header="`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`"
-          itemLayout="horizontal"
-        >
-          <a-list-item slot="renderItem" slot-scope="item, index">
-            <a-comment
-              :author="item.author"
-              :avatar="item.avatar"
-              :content="item.content"
-              :datetime="item.datetime"
-            >
-            </a-comment>
-          </a-list-item>
-        </a-list>
         <a-comment>
           <a-avatar
             slot="avatar"
             src="/avatar2.jpg"
-            alt="Han Solo"
           />
           <div slot="content">
             <a-form-item>
@@ -86,7 +44,7 @@
             </a-form-item>
             <a-form-item>
               <a-button htmlType="submit" :loading="submitting" @click="handleSubmit" type="primary">
-                Add Comment
+                回复
               </a-button>
             </a-form-item>
           </div>
@@ -109,46 +67,31 @@ export default {
   },
   data() {
     return {
-        likes: 0,
-        dislikes: 0,
-        action: null,
         comments: [],
         submitting: false,
-        value: '',
         moment,
         data: [
           {
-            actions: ['Reply to'],
             author: '刘一',
             avatar: '/avatar2.jpg',
             content:
               '天气不错哦。',
+            index:
+              '1',
             datetime: moment().subtract(0, 'days'),
           },
           {
-            actions: ['Reply to'],
             author: '王一一',
             avatar: '/avatar2.jpg',
             content:
               '冬天到了，多添衣哦~',
+            index:
+              '2',
             datetime: moment().subtract(0, 'days'),
           },
         ],
-        moment,
       };
    },
-   methods: {
-      like() {
-        this.likes = 1;
-        this.dislikes = 0;
-        this.action = 'liked';
-      },
-      dislike() {
-        this.likes = 0;
-        this.dislikes = 1;
-        this.action = 'disliked';
-      },
-    },
    methods: {
       handleSubmit() {
         if (!this.value) {

@@ -1,7 +1,7 @@
 <template>
   <page-view title="老师信息">
     <div>
-      <template>
+      <a-card>
         <div style="padding: 20px;">
           <a-row :gutter="16">
             <a-col :span="8">
@@ -118,7 +118,7 @@
             </a-col>
           </a-row>
         </div>
-      </template>
+      </a-card>
     </div>
   </page-view>
 </template>
