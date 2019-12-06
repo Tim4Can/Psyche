@@ -75,10 +75,12 @@
         <template v-if="noTitleKey === '发帖'">
         <a-list :pagination="pagination">
         <a-list-item>
+        <router-link :to="{ name: 'Detail' }">
         <a-card :bordered="false" style="width:100%">
           <a-card-meta title="阳光明媚的周一。" description="周一要上课了呀。">
           </a-card-meta>
           </a-card>
+        </router-link>
         </a-list-item>
         <a-list-item>
         <a-card :bordered="false" style="width:100%">

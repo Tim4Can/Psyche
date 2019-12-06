@@ -36,7 +36,7 @@ export const asyncRouterMap = [
           {
             path: '/warehouse/detail',
             name: 'Detail',
-            //hidden: true,
+            hidden: true,
             component: () => import( '@/views/warehouse/WarehouseDetail' ),
             meta: {
               title: '详情', keepAlive: false,icon: 'copy'
@@ -122,7 +122,7 @@ export const asyncRouterMap = [
           {
             path: '/sheets/checkSheet',
             name: 'checkSheet',
-            //hidden: true,
+            hidden: true,
             component: () => import( '@/views/sheets/checkSheet' ),
             meta: {title: '老师详情', keepAlive: false, icon: 'copy'}
           },

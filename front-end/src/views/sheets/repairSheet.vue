@@ -5,6 +5,7 @@
         <div style="padding: 20px;">
           <a-row :gutter="16">
             <a-col :span="8">
+              <router-link :to="{ name: 'checkSheet' }">
               <a-card hoverable style="width: 300px">
                 <img
                      alt="example"
@@ -21,6 +22,7 @@
                 />
                 </a-card-meta>
               </a-card>
+              </router-link>
             </a-col>
             <a-col :span="8">
               <a-card hoverable style="width: 300px">
