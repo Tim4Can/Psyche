@@ -18,21 +18,123 @@
                 />
                 </a-card-meta>
               </a-card>
-             </a-col>
-             <a-col :span="8">
-              <div>
-              <h1>基本信息</h1>
+              <div style="margin-left:40px">
               <li>国家一级咨询师</li>
               <li> 国际催眠治疗师</li>
               <li> 央视极速少年专家</li>
               <li> 欧文亚隆团体咨询师</li>
               </div>
              </a-col>
-             <a-col :span="8">
+             <a-col :span="12">
               <h2>选择预约时间</h2>
-              <template>
-                <a-cascader :options="options" @change="onChange" />
-              </template>
+              <a-row :gutter="16">
+              <a-card>
+                <a-col :span="5">
+                  </br>
+                  <a-row>
+                    <p>10:00~11:00</P>
+                  </a-row>
+                  <a-row>
+                    <p>11:00~12:00</P>
+                  </a-row>
+                  <a-row>
+                    <p>14:00~15:00</P>
+                  </a-row>
+                  <a-row>
+                    <p>15:00~16:00</P>
+                  </a-row>
+                </a-col>
+                <a-col>
+                <a-row>
+                <a-col :span="2">
+                  <h4>周一</h4>
+                  <a-button-group>
+                  <a-row>
+                    <a-button  disabled />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  </a-button-group>
+                </a-col>
+                <a-col :span="2">
+                  <h4>周二</h4>
+                  <a-button-group>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  </a-button-group>
+                </a-col>
+                <a-col :span="2">
+                  <h4>周三</h4>
+                  <a-button-group>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  </a-button-group>
+                </a-col>
+                <a-col :span="2">
+                  <h4>周四</h4>
+                  <a-button-group>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  </a-button-group>
+                </a-col>
+                <a-col :span="2">
+                  <h4>周五</h4>
+                  <a-button-group>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  <a-row>
+                    <a-button />
+                  </a-row>
+                  </a-button-group>
+                </a-col>
+                </a-row>
+                </a-col>
+              </a-card>
+              </a-row>
              </a-col>
            </a-row>
           </template>
@@ -48,132 +150,17 @@ import { PageView } from '@/layouts'
 
 Vue.use(Lightbox)
 
+
 export default {
   components: {
     PageView
   },
   data() {
       return {
-        options: [
-          {
-            value: '周一',
-            label: '周一',
-            children: [
-                  {
-                    value: '9:00~10:00',
-                    label: '9:00~10:00',
-                  },
-                  {
-                    value: '11:00~12:00',
-                    label: '11:00~12:00',
-                  },
-                  {
-                    value: '14:00~15:00',
-                    label: '14:00~15:00',
-                  },
-                  {
-                    value: '16:00~17:00',
-                    label: '16:00~17:00',
-                  },
-                ],
-          },
-          {
-            value: '周二',
-            label: '周二',
-            children: [
-                  {
-                    value: '9:00~10:00',
-                    label: '9:00~10:00',
-                  },
-                  {
-                    value: '11:00~12:00',
-                    label: '11:00~12:00',
-                  },
-                  {
-                    value: '14:00~15:00',
-                    label: '14:00~15:00',
-                  },
-                  {
-                    value: '16:00~17:00',
-                    label: '16:00~17:00',
-                  },
-                ],
-          },
-          {
-            value: '周三',
-            label: '周三',
-            children: [
-                  {
-                    value: '9:00~10:00',
-                    label: '9:00~10:00',
-                  },
-                  {
-                    value: '11:00~12:00',
-                    label: '11:00~12:00',
-                  },
-                  {
-                    value: '14:00~15:00',
-                    label: '14:00~15:00',
-                  },
-                  {
-                    value: '16:00~17:00',
-                    label: '16:00~17:00',
-                  },
-                ],
-          },
-          {
-            value: '周四',
-            label: '周四',
-            children: [
-                  {
-                    value: '9:00~10:00',
-                    label: '9:00~10:00',
-                  },
-                  {
-                    value: '11:00~12:00',
-                    label: '11:00~12:00',
-                  },
-                  {
-                    value: '14:00~15:00',
-                    label: '14:00~15:00',
-                  },
-                  {
-                    value: '16:00~17:00',
-                    label: '16:00~17:00',
-                  },
-                ],
-          },
-          {
-            value: '周五',
-            label: '周五',
-            children: [
-                  {
-                    value: '9:00~10:00',
-                    label: '9:00~10:00',
-                  },
-                  {
-                    value: '11:00~12:00',
-                    label: '11:00~12:00',
-                  },
-                  {
-                    value: '14:00~15:00',
-                    label: '14:00~15:00',
-                  },
-                  {
-                    value: '16:00~17:00',
-                    label: '16:00~17:00',
-                  },
-                ],
-          },
-        ],
+
       };
-    },
-    methods: {
-      onChange(value) {
-        console.log(value);
-      },
-    },
-}
+  },
+};
 
 </script>
 
