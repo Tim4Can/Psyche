@@ -1,5 +1,6 @@
 package cn.psyche.javaee.controller;
 
+import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.entity.Student;
 import cn.psyche.javaee.entity.StudentNoPwd;
 import cn.psyche.javaee.service.ConstantUtils;
@@ -8,6 +9,7 @@ import cn.psyche.javaee.service.ResultEnum;
 import cn.psyche.javaee.service.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,8 @@ import java.io.PrintWriter;
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private StudentDao studentDao;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
@@ -30,8 +34,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         //have login
         HttpSession session=request.getSession();
-        StudentNoPwd s= (StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
-        if(s!=null){
+        if(session.getAttribute(ConstantUtils.USER_SESSION_KEY)!=null){
             System.out.println("user pass");
             return true;
         }

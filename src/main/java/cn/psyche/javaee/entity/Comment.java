@@ -17,6 +17,7 @@ public class Comment implements Serializable{
     String content;
     Date sendTime;
     int anonymous;
+    String speakerName;
 
     @Override
     public String toString(){

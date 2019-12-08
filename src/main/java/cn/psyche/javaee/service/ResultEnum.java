@@ -5,6 +5,7 @@ public enum ResultEnum {
     FAIL(400,"fail"),
     UNAUTHORIZED(401,"unauthorized"),
     NOT_FOUND(404,"not found"),
+    HAVE_OCCUPIED(5,"have been occupied"),
     LOGIN_FAIL(1,"invalid password or user"),
     NOT_LOGIN(2,"login please"),
     PASSWORD_INCORRECT(3,"wrong password"),

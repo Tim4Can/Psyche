@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TreeholeDao extends JpaRepository<Treehole,Integer> {
-    List<Treehole> findByOwnerId(int id);
+   // List<Treehole> findByOwnerId(int id);
     Treehole findById(int id);
     //Page<Treehole> findAll(Pageable pegeable);
     Page<Treehole> findAll(Pageable pegeable);

@@ -37,18 +37,18 @@ public class StudentController {
     @RequestMapping(value = "/myTreeholes",method = RequestMethod.GET)
     public Result getMyTreeholes(HttpServletRequest request,@RequestParam(value="page",required = false,defaultValue = "0") int page){
         HttpSession session=request.getSession();
-        StudentNoPwd s=(StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
-        return ResultUtil.success(myInfosService.myTreeholes(s,page));
+        int id=(int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        return ResultUtil.success(myInfosService.myTreeholes(id,page));
     }
 
     @RequestMapping(value = "/modifyPwd")
     public Result modifyPwd(HttpServletRequest request){
         HttpSession session=request.getSession();
-        StudentNoPwd s=(StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        int id=(int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
         String newPwd=request.getParameter("newPwd");
         String oldPwd=request.getParameter("oldPwd");
 
-        return myInfosService.modifyPwd(newPwd,oldPwd,s);
+        return myInfosService.modifyPwd(newPwd,oldPwd,id);
     }
 
     @RequestMapping(value="/loginOut")

@@ -1,10 +1,9 @@
 package cn.psyche.javaee.service;
 
 import cn.psyche.javaee.dao.CommentDao;
+import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.dao.TreeholeDao;
-import cn.psyche.javaee.entity.Comment;
-import cn.psyche.javaee.entity.Treehole;
-import cn.psyche.javaee.entity.HoleList;
+import cn.psyche.javaee.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +16,11 @@ import java.util.*;
 @Service("treeholeService")
 public class TreeholeService {
     @Autowired
-    TreeholeDao treeholeDao;
+    private TreeholeDao treeholeDao;
     @Autowired
-    CommentDao commentDao;
+    private CommentDao commentDao;
+    @Autowired
+    private StudentDao studentDao;
     private static long treeholePgCount=-1; //pages count from 0
     private static long commentPgCount=-1;//pages count from 0
 
@@ -87,15 +88,21 @@ public class TreeholeService {
 
         //get treehole
         Treehole  treehole=treeholeDao.findById(treeholeId);
+
         //not found
         if(treehole==null){
             System.out.println("treehole not exists.");
             return null;
         }
-        //get the first page of comments
-        this.commentPgCount=commentDao.countByTreeHoleId(treeholeId);
+        //refresh comment page
+        refreshCommentPg(treeholeId);
+        //get comments
         Map<String,Object> comments=getCommentList(treeholeId,page);
         //send treehole and its comments
+        if(treehole.getAnonymous()==0){
+            Student owner=studentDao.findById(treehole.getOwnerId());
+            map.put("owner",owner.getNickName());
+        }
         map.put("treehole",treehole);
         map.put("comments",comments);
         return map;
@@ -143,11 +150,15 @@ public class TreeholeService {
        comment.setTreeHoleId(treehole);
        comment.setSpeakerId(speaker);
        comment.setContent(content);
-       comment.setAnonymous(anonymous);
+       if(anonymous==1){
+           comment.setAnonymous(1);
+       }else{
+           comment.setSpeakerName(studentDao.findById(speaker).getNickName());
+       }
        commentDao.saveAndFlush(comment);
 
        refreshCommentPg(treehole);
-       return ResultUtil.success();
+       return ResultUtil.success(comment);
     }
 
     public void refreshCommentPg(int id){

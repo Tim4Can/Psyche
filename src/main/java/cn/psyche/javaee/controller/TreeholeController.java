@@ -57,8 +57,7 @@ public class TreeholeController {
     @RequestMapping(value="/sendTreehole")
     public Result sentTreehole(HttpServletRequest request){
         HttpSession session=request.getSession();
-        StudentNoPwd s= (StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
-        int user=s.getId();
+        int user= (int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
         String title=request.getParameter("title");
         String content=request.getParameter("content");
         int anonymous=Integer.parseInt(request.getParameter("anonymous"));
@@ -71,8 +70,7 @@ public class TreeholeController {
     @RequestMapping(value = "/sendComment",method = RequestMethod.POST)
     public Result sentComment(HttpServletRequest request){
         HttpSession session=request.getSession();
-        StudentNoPwd s= (StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
-        int user=s.getId();
+        int user= (int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
         String content=request.getParameter("content");
         int treehole=Integer.parseInt(request.getParameter("treeholeId"));
         int anonymous=Integer.parseInt(request.getParameter("anonymous"));
@@ -85,8 +83,7 @@ public class TreeholeController {
     public Result removeTreehole(HttpServletRequest request){
         int id=Integer.parseInt(request.getParameter("id"));
         HttpSession session=request.getSession();
-        StudentNoPwd s= (StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
-        int user=s.getId();
+        int user= (int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
         return treeholeService.deleteTreehole(user,id);
     }
 

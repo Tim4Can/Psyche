@@ -26,39 +26,18 @@ public class MyInfosService {
 
     public Result myInfos(HttpServletRequest request){
         HttpSession session=request.getSession();
-        StudentNoPwd s=(StudentNoPwd) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        int id=(int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        Student s=studentDao.findById(id);
         //has been replaced by loginInterceptor
         if(s==null){
             return ResultUtil.error(ResultEnum.NOT_LOGIN);
         }
 
-        return ResultUtil.success(s);
+        return ResultUtil.success(s.copy());
     }
 
-    /*
-    public Result myTreeholes(StudentNoPwd s){
-        //has been replaced by loginInterceptor
-        if(s==null){
-            return ResultUtil.error(ResultEnum.NOT_LOGIN);
-        }
-        /*
-        Lishole> treeholes=treeholeDao.findByOwnerId(s.getId());
-        HoleList[] list=new HoleList[treeholes.size()];
-        for(int i=0;i<treeholes.size();i++){
-            list[i]=new HoleList();
-            list[i].setByTreehole(treeholes.get(i));
-
-        }
-        List li = new ArrayList(Arrays.asList(list));
-
-
-
-        return ResultUtil.success();
-
-    }
-   */
-    public Result modifyPwd(String newPwd,String oldPwd,StudentNoPwd s){
-       Student student=studentDao.findById(s.getId()).get();
+    public Result modifyPwd(String newPwd,String oldPwd,int id){
+        Student student=studentDao.findById(id);
         String pwd=student.getPassword();
 
         if(!pwd.equals(oldPwd)){
@@ -70,12 +49,10 @@ public class MyInfosService {
         return ResultUtil.success();
     }
 
-    public Map<String,Object> myTreeholes(StudentNoPwd s,int page){
-        //has been replaced by loginInterceptor
-        int myself=s.getId();
+    public Map<String,Object> myTreeholes(int id,int page){
 
         Sort sort = Sort.by(Sort.Direction.DESC,"id");
-        Page<Treehole> pg=treeholeDao.findByOwnerId(myself,PageRequest.of(page,ConstantUtils.TREEHOLE_PAGE_SIZE,sort));
+        Page<Treehole> pg=treeholeDao.findByOwnerId(id,PageRequest.of(page,ConstantUtils.TREEHOLE_PAGE_SIZE,sort));
         List<Treehole> treeholes=pg.getContent();
 
         //no treeholes
