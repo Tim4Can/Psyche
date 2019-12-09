@@ -6,19 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
-@Table(name = "announcement")
+@Table(name = "psytest")
 @Entity
-@Data
-public class Announcement {
+@Data public class PsyTest {
 
     @Id
     @GeneratedValue
-    private int id;
-
+    private int Id;
     private String title;
-    private String content;
-    private Date announcementTime;
+    private String description;
 
 }

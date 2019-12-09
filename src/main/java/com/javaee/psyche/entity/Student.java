@@ -2,9 +2,7 @@ package com.javaee.psyche.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "student")
 @Entity
@@ -16,7 +14,8 @@ import javax.persistence.Table;
     private String name;
     private String nickName;
     private String password;
-    private String hesdPortrait;
+    private String headPortrait;
     private int identity;
+
 
 }

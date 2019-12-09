@@ -1,6 +1,6 @@
 package com.javaee.psyche.controller;
 
-import com.javaee.psyche.entity.Result;
+import com.javaee.psyche.Util.Result;
 import com.javaee.psyche.service.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ public class AnnouncementController {
     @Autowired
     private AnnouncementService announcementService;
 
-    @RequestMapping(value = "/browseAnnouncements",method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public Result browseArticles(@RequestParam("pageNum")int pageNum, @RequestParam("pageSize") int pageSize){
 
         return announcementService.findAll(pageNum, pageSize);

@@ -2,8 +2,8 @@ package com.javaee.psyche.service;
 
 import com.javaee.psyche.dao.AnnouncementDao;
 import com.javaee.psyche.entity.Announcement;
-import com.javaee.psyche.entity.Result;
-import com.javaee.psyche.entity.ResultUtil;
+import com.javaee.psyche.Util.Result;
+import com.javaee.psyche.Util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
