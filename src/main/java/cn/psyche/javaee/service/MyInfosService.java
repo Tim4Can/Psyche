@@ -7,6 +7,7 @@ import cn.psyche.javaee.entity.StudentNoPwd;
 import cn.psyche.javaee.entity.Treehole;
 import cn.psyche.javaee.entity.HoleList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,9 +25,9 @@ public class MyInfosService {
     @Autowired
     private StudentDao studentDao;
 
-    public Result myInfos(HttpServletRequest request){
-        HttpSession session=request.getSession();
-        int id=(int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+    @Cacheable(value = "myInfos")
+    public Result myInfos(int id){
+
         Student s=studentDao.findById(id);
         //has been replaced by loginInterceptor
         if(s==null){
@@ -54,6 +55,7 @@ public class MyInfosService {
         Sort sort = Sort.by(Sort.Direction.DESC,"id");
         Page<Treehole> pg=treeholeDao.findByOwnerId(id,PageRequest.of(page,ConstantUtils.TREEHOLE_PAGE_SIZE,sort));
         List<Treehole> treeholes=pg.getContent();
+        System.out.println("It's called here when there's no cache！");
 
         //no treeholes
         if(treeholes==null){

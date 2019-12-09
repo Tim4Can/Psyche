@@ -1,4 +1,4 @@
-package cn.psyche.javaee.controller;
+package cn.psyche.javaee.config;
 
 import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.entity.Student;

@@ -5,6 +5,8 @@ import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.dao.TreeholeDao;
 import cn.psyche.javaee.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

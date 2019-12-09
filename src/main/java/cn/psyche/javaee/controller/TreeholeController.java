@@ -16,6 +16,7 @@ import java.util.Map;
 public class TreeholeController {
     @Autowired
     TreeholeService treeholeService;
+
 /*
     //get the first page of treehole list
     @RequestMapping(method= RequestMethod.GET)
@@ -24,6 +25,7 @@ public class TreeholeController {
         return ResultUtil.success(treeholeService.getTreeholes(0));
     }
 */
+
     //get certain page of the treehole list
     @RequestMapping(method =RequestMethod.GET)
     public Result getCertainList(@RequestParam(value="page",required = false,defaultValue = "0") int page){
@@ -36,12 +38,15 @@ public class TreeholeController {
     public Object getTreehole(@RequestParam("id") int id,@RequestParam(value="page",required = false,defaultValue = "0") int page){
 
         Map<String,Object> map=treeholeService.getTreehole(id,page);
+        System.out.println("Redis test:");
+
         if(map==null)
             return ResultUtil.error(ResultEnum.NOT_FOUND);
         else
             return ResultUtil.success(map);
 
     }
+
 /*
     //get certain page of comments
     @RequestMapping(value = "/treehole={id}&page={page}",method = RequestMethod.GET)
@@ -53,6 +58,7 @@ public class TreeholeController {
             return ResultUtil.success(map);
     }
 */
+
     //release treehole
     @RequestMapping(value="/sendTreehole")
     public Result sentTreehole(HttpServletRequest request){

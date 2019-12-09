@@ -2,8 +2,10 @@ package cn.psyche.javaee.service;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Result {
+public class Result implements Serializable {
     private int code;
     private String msg;
     private Object data;

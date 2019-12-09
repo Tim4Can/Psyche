@@ -31,13 +31,17 @@ public class StudentController {
 
     @RequestMapping(value = "/myInfos",method = RequestMethod.GET)
     public Result getMyInfos(HttpServletRequest request){
-        return myInfosService.myInfos(request);
+        HttpSession session=request.getSession();
+        int id=(int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+
+        return myInfosService.myInfos(id);
     }
 
     @RequestMapping(value = "/myTreeholes",method = RequestMethod.GET)
     public Result getMyTreeholes(HttpServletRequest request,@RequestParam(value="page",required = false,defaultValue = "0") int page){
         HttpSession session=request.getSession();
         int id=(int) session.getAttribute(ConstantUtils.USER_SESSION_KEY);
+        System.out.println("Redis test:");
         return ResultUtil.success(myInfosService.myTreeholes(id,page));
     }
 

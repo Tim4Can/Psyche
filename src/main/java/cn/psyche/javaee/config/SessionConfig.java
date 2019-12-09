@@ -1,4 +1,4 @@
-package cn.psyche.javaee.controller;
+package cn.psyche.javaee.config;
 
 
 import org.springframework.context.annotation.Configuration;

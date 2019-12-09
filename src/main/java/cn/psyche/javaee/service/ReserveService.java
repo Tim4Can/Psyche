@@ -5,6 +5,8 @@ import cn.psyche.javaee.dao.TeacherDao;
 import cn.psyche.javaee.entity.Reservation;
 import cn.psyche.javaee.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,6 +23,7 @@ public class ReserveService {
     private static long teacherPgCount=-1;
 
     //get teacherList by page
+    @Cacheable(value="teachers")
     public Map<String,Object> getTeachers(int page){
         Sort sort = Sort.by(Sort.Direction.ASC,"id");
         Page<Teacher> pg=teacherDao.findAll(PageRequest.of(page,ConstantUtils.TEACHER_PAGE_SIZE,sort));
@@ -37,6 +40,7 @@ public class ReserveService {
     }
 
     //get reservation table of certain teacher
+    @Cacheable(value="schedule")
     public Result getReservationTable(int teacherId){
         Optional<Teacher> optional=teacherDao.findById(teacherId);
         if(optional.isPresent()==false){
@@ -47,6 +51,7 @@ public class ReserveService {
     }
 
     //reserve
+    @CacheEvict(value={"schedule","myReservation"},allEntries = true)
     public Result reserveTeacher(int teacher,int student,int day,int period){
         Optional<Reservation> optional=reservationDao.findByTeacherIdAndAndTimePeriodAndDay(teacher,period,day);
         //have been occupied
@@ -70,6 +75,7 @@ public class ReserveService {
     }
 
     //cancel
+    @CacheEvict(value={"schedule","myReservation"},allEntries = true)
     public Result cancelReservation(int id){
         Reservation reservation=reservationDao.findById(id);
         if(reservation==null){
@@ -80,6 +86,7 @@ public class ReserveService {
     }
 
     //check my reservation
+    @Cacheable(value = "myReservation")
     public Result myReservation(int studentId){
         List<Reservation> reservations=reservationDao.findByStudentId(studentId);
         return ResultUtil.success(reservations);
