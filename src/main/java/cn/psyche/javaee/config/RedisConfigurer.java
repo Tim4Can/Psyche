@@ -21,7 +21,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @EnableCaching
-public class RedisConfiguration extends CachingConfigurerSupport {
+public class RedisConfigurer extends CachingConfigurerSupport {
 
     //Custom key generation rules
     @Override
