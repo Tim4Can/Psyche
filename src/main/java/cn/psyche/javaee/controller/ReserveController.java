@@ -1,9 +1,9 @@
 package cn.psyche.javaee.controller;
 
-import cn.psyche.javaee.service.ConstantUtils;
+import cn.psyche.javaee.util.ConstantUtils;
 import cn.psyche.javaee.service.ReserveService;
-import cn.psyche.javaee.service.Result;
-import cn.psyche.javaee.service.ResultUtil;
+import cn.psyche.javaee.util.Result;
+import cn.psyche.javaee.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

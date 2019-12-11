@@ -1,4 +1,4 @@
-package cn.psyche.javaee.service;
+package cn.psyche.javaee.util;
 
 public class ConstantUtils {
     public final static String USER_SESSION_KEY="USER";

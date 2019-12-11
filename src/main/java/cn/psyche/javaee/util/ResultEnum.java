@@ -1,4 +1,4 @@
-package cn.psyche.javaee.service;
+package cn.psyche.javaee.util;
 
 public enum ResultEnum {
     SUCCESS(200,"success"),
@@ -9,6 +9,7 @@ public enum ResultEnum {
     LOGIN_FAIL(1,"invalid password or user"),
     NOT_LOGIN(2,"login please"),
     PASSWORD_INCORRECT(3,"wrong password"),
+    NO_RECORD(007,"no record"),
     INTERNAL_SERVER_ERROR(500,"internal server error");
 
     public int code;

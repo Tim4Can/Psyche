@@ -1,9 +1,9 @@
 package cn.psyche.javaee.controller;
 
-import cn.psyche.javaee.dao.StudentDao;
-import cn.psyche.javaee.entity.Student;
-import cn.psyche.javaee.entity.StudentNoPwd;
 import cn.psyche.javaee.service.*;
+import cn.psyche.javaee.util.ConstantUtils;
+import cn.psyche.javaee.util.Result;
+import cn.psyche.javaee.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

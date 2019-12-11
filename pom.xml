@@ -82,7 +82,17 @@
         </dependency>
         <!--redis配置结束-->
 
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.easemob</groupId>
+            <artifactId>rest-java-sdk</artifactId>
+            <version>1.0.2</version>
+        </dependency>
 
     </dependencies>
 

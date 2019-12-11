@@ -2,6 +2,10 @@ package cn.psyche.javaee.service;
 
 import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.entity.StudentNoPwd;
+import cn.psyche.javaee.util.ConstantUtils;
+import cn.psyche.javaee.util.Result;
+import cn.psyche.javaee.util.ResultEnum;
+import cn.psyche.javaee.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +18,7 @@ public class LoginService {
     @Autowired
     private StudentDao studentDao;
 
-    public  Result login(int id, String pwd,HttpSession session){
+    public Result login(int id, String pwd, HttpSession session){
 
         Optional<StudentNoPwd> optional=studentDao.findByIdAndPassword(id,pwd);
 

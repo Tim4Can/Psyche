@@ -4,15 +4,16 @@ import cn.psyche.javaee.dao.CommentDao;
 import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.dao.TreeholeDao;
 import cn.psyche.javaee.entity.*;
+import cn.psyche.javaee.util.ConstantUtils;
+import cn.psyche.javaee.util.Result;
+import cn.psyche.javaee.util.ResultEnum;
+import cn.psyche.javaee.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Service("treeholeService")
@@ -30,7 +31,7 @@ public class TreeholeService {
     //get certain page of treehole
    public Map<String,Object> getTreeholes(int page){
         Sort sort = Sort.by(Sort.Direction.DESC,"id");
-        Page<Treehole> pg=treeholeDao.findAll(PageRequest.of(page,ConstantUtils.TREEHOLE_PAGE_SIZE,sort));
+        Page<Treehole> pg=treeholeDao.findAll(PageRequest.of(page, ConstantUtils.TREEHOLE_PAGE_SIZE,sort));
         List<Treehole> treeholes=pg.getContent();
 
         //no treeholes
@@ -111,7 +112,7 @@ public class TreeholeService {
     }
 
     //release treehole
-    public Result sendTreehole(String title,String content,int id,int anonymous){
+    public Result sendTreehole(String title, String content, int id, int anonymous){
        Treehole treehole=new Treehole();
        Calendar calendar=Calendar.getInstance();
        treehole.setSendTime(calendar.getTime());

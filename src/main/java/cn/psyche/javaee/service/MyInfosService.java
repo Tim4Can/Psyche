@@ -3,9 +3,12 @@ package cn.psyche.javaee.service;
 import cn.psyche.javaee.dao.StudentDao;
 import cn.psyche.javaee.dao.TreeholeDao;
 import cn.psyche.javaee.entity.Student;
-import cn.psyche.javaee.entity.StudentNoPwd;
 import cn.psyche.javaee.entity.Treehole;
 import cn.psyche.javaee.entity.HoleList;
+import cn.psyche.javaee.util.ConstantUtils;
+import cn.psyche.javaee.util.Result;
+import cn.psyche.javaee.util.ResultEnum;
+import cn.psyche.javaee.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -13,8 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Service("myInfosService")
@@ -53,7 +54,7 @@ public class MyInfosService {
     public Map<String,Object> myTreeholes(int id,int page){
 
         Sort sort = Sort.by(Sort.Direction.DESC,"id");
-        Page<Treehole> pg=treeholeDao.findByOwnerId(id,PageRequest.of(page,ConstantUtils.TREEHOLE_PAGE_SIZE,sort));
+        Page<Treehole> pg=treeholeDao.findByOwnerId(id,PageRequest.of(page, ConstantUtils.TREEHOLE_PAGE_SIZE,sort));
         List<Treehole> treeholes=pg.getContent();
         System.out.println("It's called here when there's no cache！");
 

@@ -1,12 +1,10 @@
 package cn.psyche.javaee.config;
 
 import cn.psyche.javaee.dao.StudentDao;
-import cn.psyche.javaee.entity.Student;
-import cn.psyche.javaee.entity.StudentNoPwd;
-import cn.psyche.javaee.service.ConstantUtils;
-import cn.psyche.javaee.service.Result;
-import cn.psyche.javaee.service.ResultEnum;
-import cn.psyche.javaee.service.ResultUtil;
+import cn.psyche.javaee.util.ConstantUtils;
+import cn.psyche.javaee.util.Result;
+import cn.psyche.javaee.util.ResultEnum;
+import cn.psyche.javaee.util.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

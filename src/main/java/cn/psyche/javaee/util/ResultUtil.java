@@ -1,4 +1,4 @@
-package cn.psyche.javaee.service;
+package cn.psyche.javaee.util;
 
 public class ResultUtil {
 
@@ -25,6 +25,14 @@ public class ResultUtil {
         Result result=new Result();
         result.setCode(e.getCode());
         result.setMsg(e.getMsg());
+        return result;
+    }
+
+    public static Result noRecord(){
+        Result result=new Result();
+        result.setCode(ResultEnum.NO_RECORD.getCode());
+        result.setMsg(ResultEnum.NO_RECORD.getMsg());
+
         return result;
     }
 }

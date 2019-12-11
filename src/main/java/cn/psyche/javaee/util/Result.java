@@ -1,4 +1,4 @@
-package cn.psyche.javaee.service;
+package cn.psyche.javaee.util;
 
 import lombok.Data;
 
