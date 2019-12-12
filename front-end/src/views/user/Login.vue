@@ -60,7 +60,7 @@
 import md5 from 'md5'
 import { mapActions } from 'vuex'
 import { timeFix } from '@/utils/util'
-import { getSmsCaptcha, get2step } from '@/api/login'
+import { getSmsCaptcha, get2step } from '@/api/User'
 
 export default {
   data() {
@@ -129,7 +129,7 @@ export default {
     },
     loginSuccess(res) {
       console.log(res)
-      this.$router.push({ name: 'staffManage' })
+      this.$router.push({ name: 'myPage' })
       // 延迟 1 秒显示欢迎信息
       setTimeout(() => {
         this.$notification.success({
@@ -139,20 +139,11 @@ export default {
       }, 1000)
     },
     requestFailed(err) {
-      console.log(res)
-      this.$router.push({ name: 'staffManage' })
-      // 延迟 1 秒显示欢迎信息
-      setTimeout(() => {
-        this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
-        })
-      }, 1000)
-//      this.$notification['error']({
-//        message: '错误',
-//        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
-//        duration: 4
-//      })
+      this.$notification['error']({
+        message: '错误',
+        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
+        duration: 4
+      })
     }
   }
 }

@@ -6,7 +6,6 @@ if ( process.env.NODE_ENV !== 'production' || process.env.VUE_APP_PREVIEW === 't
   // 防止 vuex 中的 GetInfo 早于 mock 运行，导致无法 mock 请求返回结果
   console.log( 'mock mounting' )
   require( './services/auth' )
-  require( './services/user' )
   require( './services/manage' )
   require( './services/other' )
   require( './services/tagCloud' )
@@ -16,7 +15,9 @@ if ( process.env.NODE_ENV !== 'production' || process.env.VUE_APP_PREVIEW === 't
   require( './services/equipment' )
   require( './services/staff' )
   require( './services/accessory' )
-  require( './services/repairSheet')
+  require( './services/teacher')
+  require( './services/Treehole')
+  require( './services/User')
 
   Mock.setup( {
     timeout: 800 // setter delay time

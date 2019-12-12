@@ -1,7 +1,7 @@
 <template>
   <page-view title="个人中心">
-    <template>
-      <div>
+    <a-row>
+      <a-col :md="24" :lg="7">
         <a-card style="width:300px">
         <a-table :columns="columns" :dataSource="data" :pagination="false">
           <span slot="customTitle"><a-avatar src="/avatar2.jpg" /> 学号</span>
@@ -65,7 +65,8 @@
             </a-modal>
           </div>
         </a-card>
-        <br /><br />
+      </a-col>
+      <a-col>
         <a-card
           style="width:100%"
           :tabList="tabListNoTitle"
@@ -122,8 +123,8 @@
       </template>
        </a-card>
        </a-card>
-      </div>
-    </template>
+      </a-col>
+    </a-row>
   </page-view>
 </template>
 

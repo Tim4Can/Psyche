@@ -19,25 +19,25 @@ export const asyncRouterMap = [
       },
       // warehouse
       {
-        path: '/warehouse',
-        name: 'warehouse',
-        redirect: '/warehouse/preview',
+        path: '/treeHole',
+        name: 'tree',
+        redirect: '/treeHole/treeHole',
         component: RouteView,
         meta: {title: '树洞', keepAlive: true, icon: chat},
         children: [
           {
-            path: '/warehouse/preview',
-            name: 'Preview',
-            component: () => import( '@/views/warehouse/WarehousePreview' ),
+            path: '/treeHole/treeHole',
+            name: 'TreeHole',
+            component: () => import( '@/views/treeHole/TreeHole' ),
             meta: {
               title: '帖子', keepAlive: false, icon: 'exception'
             }
           },
           {
-            path: '/warehouse/detail',
-            name: 'Detail',
+            path: '/treeHole/postDetail/:id',
+            name: 'PostDetail',
             hidden: true,
-            component: () => import( '@/views/warehouse/WarehouseDetail' ),
+            component: () => import( '@/views/treeHole/PostDetail' ),
             meta: {
               title: '详情', keepAlive: false,icon: 'copy'
             }
@@ -105,50 +105,42 @@ export const asyncRouterMap = [
           }
         ]
       },
-      // sheets
+      // counseling
       {
-        path: '/sheets',
-        name: 'sheets',
-        redirect: '/sheets/workSheet',
+        path: '/counseling',
+        name: 'counseling',
+        redirect: '/counseling/teacher',
         component: RouteView,
         meta: {title: '线上预约', keepAlive: true, icon: "table"},
         children: [
           {
-            path: '/sheets/repairSheet',
-            name: 'repairSheet',
-            component: () => import( '@/views/sheets/repairSheet' ),
+            path: '/counseling/teacher',
+            name: 'teacher',
+            component: () => import( '@/views/counseling/Teacher' ),
             meta: {title: '老师信息', keepAlive: false, icon: 'exception'}
           },
           {
-            path: '/sheets/checkSheet',
-            name: 'checkSheet',
-            hidden: true,
-            component: () => import( '@/views/sheets/checkSheet' ),
-            meta: {title: '老师详情', keepAlive: false, icon: 'copy'}
-          },
-          {
-            path: '/sheets/workSheet',
-            name: 'workSheet',
-            component: () => import( '@/views/sheets/workSheet' ),
+            path: '/counseling/myReservation',
+            name: 'myReservation',
+            component: () => import( '@/views/counseling/MyReservation' ),
             meta: {title: '我的预约', keepAlive: false, icon: 'snippets'}
           },
           {
-            path: '/sheets/components/:details',
-            name: 'repairDetail',
+            path: '/teacher/components/:details',
+            name: 'teacherDetail',
             hidden: true,
-            component: () => import( '@/views/sheets/components/repairSheetDetail' ),
+            component: () => import( '@/views/counseling/components/TeacherDetail' ),
             meta: {
-              title: '报修单详情', keepAlive: false, icon: 'bars'
+              title: '老师详情', keepAlive: false, icon: 'bars'
             },
           },
         ]
       },
 
-      // staff
       {
-        path: '/staff/staffManage',
-        name: 'staffManage',
-        component: () => import( '@/views/staff/staffManage' ),
+        path: '/user/MyPage',
+        name: 'myPage',
+        component: () => import( '@/views/user/MyPage' ),
         meta: {title: '个人中心', keepAlive: true, icon: 'user'}
       },
       {

@@ -1,7 +1,7 @@
 const api = {
-  Login: '/auth/login',
-  Logout: '/auth/logout',
+  Login: '/User/login',
+  Logout: '/User/loginOut',
   // get my info
-  UserInfo: '/user/info'
+  UserInfo: '/User/myInfos'
 }
 export default api

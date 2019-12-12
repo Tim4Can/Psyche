@@ -1,167 +1,13 @@
 <template>
-    <page-view title="预约" logo="/repairSheet.png">
-
-    <detail-list slot="headerContent" size="small" :col="1" class="detail-layout">
-      <detail-list-item term="待检修器材">{{this.details.EqId}}</detail-list-item>
-      <detail-list-item term="详细描述">{{this.details.details}}</detail-list-item>
-      <detail-list-item term="所需配件">{{this.details.stuffNeeded}}</detail-list-item>
-      <detail-list-item term="报修用户电话">{{this.details.telNumber}}</detail-list-item>
+    <page-view title="老师详情">
+    <a-card>
+    <detail-list :col="1" class="detail-layout">
+      <img style="width:60px" slot="avatar" src="this.details.headPortrait" />
+      <detail-list-item term="老师姓名">{{this.details.name}}</detail-list-item>
+      <detail-list-item term="详细描述">{{this.details.introduction}}</detail-list-item>
+      <detail-list-item term="咨询地址">{{this.details.address}}</detail-list-item>
     </detail-list>
-    <a-row slot="extra" class="status-list" >
-      <a-col :xs="12" :sm="12">
-        <div class="text">报修单单号</div>
-        <div class="heading" span = "4">{{this.details.title}}</div>
-      </a-col>
-    </a-row>
-
-
-    <a-card :bordered='false' :gutter="24">
-        <div class="photo" >
-          <a-row >
-          <a-col  style="textAlign:center; margin-bottom:0px;margin-top:0px">
-            <div class="heading" style="margin-bottom: 12px">
-              <a-avatar  size="large" shape="square" src="/camera.png"/>
-              {{"故障器材图片"}}
-              </div>
-          </a-col>
-          </a-row>
-          <a-col style="textAlign:center">
-        <img :src="details.cover" :alt="details.title" />
-          </a-col>
-        </div>
-      </a-card>
-
-    <a-card :bordered="false" title=" ">
-      <a-col  style="textAlign:center; margin-bottom:18px">
-            <div class="heading" >{{"报修单进度"}}</div>
-          </a-col>
-      <a-steps :direction="isMobile() && 'vertical' || 'horizontal'" :current="this.details.state-'0'" progressDot>
-        <a-step title="用户提交">
-        </a-step>
-        <a-step title="巡检员提交">
-        </a-step>
-        <a-step title="调度完成">
-        </a-step>
-      </a-steps>
     </a-card>
-
-      <a-card :bordered='false' title=" " :visible="false" >
-        <a-col  style="textAlign:center ; margin-bottom:0px">
-            <div class="heading" >{{"调度"}}</div>
-          </a-col>
-        <a-row  grid last>
-
-          <a-row>
-            <a-col :span='8'>
-              <a-form-item  :validate-status="successRepair" style="textAlign:left" label="维 修 员 " :label-col="{ span: 8 }" :wrapper-col="{ span: 15 }"
-               >
-                <a-select :disabled="qualified"
-                  style="max-width: 200px; width: 120%;"
-                  placeholder="选择维修员"
-                  @change="handleStaffChange"
-                >
-                  <a-select-option v-for="id in this.stfList" :key="id.staffId" >
-                    {{id.staffName}}
-                  </a-select-option>
-
-                </a-select>
-              </a-form-item>
-            </a-col>
-          </a-row>
-            <a-row>
-            <a-col :span='8'>
-              <a-form-item label="器材选择" :label-col="{ span: 8 }" :wrapper-col="{ span: 15 }" style="textAlign:left">
-                <a-select :disabled="qualifiedForEq"
-                  style="width: 120%;"
-                  placeholder="选择器材类型"
-                  @change="handleEqChange"
-                >
-                  <a-select-option v-for="eq in this.eqType" :key="eq.no">
-                    {{eq.type+' '+eq.model}}
-                    </a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-
-
-            <a-col :span='9'>
-              <a-form-item validate-status="success" label="数量" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }">
-                <a-input  disabled="disabled"
-                  :placeholder="text"
-                  maxLength="15"
-                  style="width: 100%"
-                  v-model="eqNum"
-                />
-              </a-form-item>
-            </a-col>
-            <a-col :span='6' style="">
-              <a-button  :disabled="qualifiedforButton" type='primary' @click="handleAddEq">添加</a-button>
-            </a-col>
-
-            </a-row>
-        </a-row>
-        <a-row grid last>
-            <a-row>
-            <a-col :span='8'>
-              <a-form-item label="配件选择" :label-col="{ span: 8 }" :wrapper-col="{ span: 15 }">
-                <a-select :disabled="qualified"
-                  style="width: 120%;"
-                  placeholder="选择配件类型"
-                  @change="handleAcChange"
-                >
-                  <a-select-option v-for="ac in this.acType" :key="ac.no">
-                    {{ac.type+' '+ac.model}}
-                  </a-select-option>
-
-                </a-select>
-              </a-form-item>
-            </a-col>
-
-            <a-col :span='9'>
-              <a-form-item :validate-status="compareAc" label="数量" :label-col="{ span: 5 }" :wrapper-col="{ span: 18 }">
-                <a-input  :disabled="qualified"
-                  :placeholder="textAc"
-                  maxLength="15"
-                  style="width: 100%"
-                  v-model="acNum"
-                />
-              </a-form-item>
-            </a-col>
-            <a-col :span='6'>
-              <a-button  :disabled="qualifiedforButtonAc" type='primary' @click="handleAddAc">添加</a-button>
-            </a-col>
-            </a-row>
-        </a-row>
-        <div :span='9' style ="margin-bottom:24px">
-        <a-button  :disabled="qualifiedforSubmit" type='primary' @click="onClickSubmit">提交</a-button>
-        <a-modal
-                title="确认提交"
-                v-model ="visible"
-                @ok = "handleOK"
-                >
-                <div class = "modal">
-                    是否完成本次调度
-                </div></a-modal>
-        </div>
-
-        <!-- table -->
-        <a-table :columns="columns"   :dataSource="this.result.ls"  bordered>
-          <template
-            v-for="col in ['statue','type','model', 'number']"
-            :slot="col"
-            slot-scope="text"
-          >
-            <div :key="col">
-              {{ text }}
-            </div>
-          </template>
-
-
-        </a-table>
-        <!-- table end -->
-
-      </a-card>
-
 
     </page-view>
 
@@ -170,47 +16,15 @@
 <script>
 import { mixinDevice } from '@/utils/mixin'
 import { PageView } from '@/layouts'
-import DetailList from '@/components/tools/DetailList'
-import {getRepairSheetDetail, submitScheduleDetail} from '@/api/sheets'
+import {getTeacherDetail} from '@/api/teacher'
 import ACol from "ant-design-vue/es/grid/Col";
-  import {mapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
 
 
 
 const DetailListItem = DetailList.Item
 console.log("DetailListItem",DetailListItem)
 
-const columns = [{
-  title: '器材/配件',
-  dataIndex: 'statue',
-  width: '25%',
-  filters:[
-    {
-      text:'器材',
-      value:'器材'
-    },{
-      text:'配件',
-      value:'配件',
-    }],
-  onFilter:(value,record) => record.statue.indexOf(value) === 0,
-  scopedSlots: { customRender: 'statue' },
-}, {
-  title: '类型',
-  dataIndex: 'type',
-  width: '25%',
-  scopedSlots: { customRender: 'type' },
-},{
-  title: '型号',
-  dataIndex: 'model',
-  width: '25%',
-  scopedSlots: { customRender: 'model' },
-}, {
-  title: '数量',
-  dataIndex: 'number',
-  width: '25%',
-  scopedSlots: { customRender: 'number' },
-  sorter: (a, b) => a.number > b.number,
-}]
 
 export default {
     inject: ['reload'],
@@ -232,7 +46,7 @@ export default {
       })
 
     },
-    name: 'repairSheetDetail',
+    name: 'teacherDetail',
     components: {
       ACol,
     PageView,

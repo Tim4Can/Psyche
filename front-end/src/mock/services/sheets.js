@@ -89,7 +89,7 @@ const workSheetRow = (data) => {
       'work_picture': '/avatar.jpg'
     }]
   }
-  
+
   let info = 'ok'
   return {
     'data': {
@@ -199,7 +199,7 @@ const checkSheetRow = (data) => {
       'checkPic': '/avatar2.jpg'
     }]
   }
-  
+
   let info = 'ok'
   return {
     'data': {
@@ -209,7 +209,7 @@ const checkSheetRow = (data) => {
   }
 }
 
-const repairSheetDetail = () => {
+const teacherDetail = () => {
   return{
   'equipType':[
   {
@@ -249,7 +249,7 @@ const repairSheetDetail = () => {
       "model":"PR",
       'number':'20'
     }
-    
+
   ],//每一类配件的model，type及其数目
   'staff':[
     {
@@ -276,5 +276,5 @@ Mock.mock(/\/sheets\/workSheet/, 'get', workSheet)
 Mock.mock(/\/sheets\/checkSheet/, 'get', checkSheet)
 Mock.mock(/\/sheets\/workSheetRow/, 'post', workSheetRow)
 Mock.mock(/\/sheets\/checkSheetRow/, 'post', checkSheetRow)
-Mock.mock(/\/sheets\/repairSheetDetail/, 'get', repairSheetDetail)
+Mock.mock(/\/teacher\/teacherDetail/, 'get', teacherDetail)
 Mock.mock(/\/sheets\/scheduleDetail/, 'post', scheduleDetail)
