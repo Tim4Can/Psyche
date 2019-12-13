@@ -117,7 +117,7 @@ import ARow from "ant-design-vue/es/grid/Row";
       TagSelect,
       TagSelectOption,
       StandardFormRow,
-      PageView
+      PageView,
       ARow,
     },
     data() {
@@ -145,6 +145,7 @@ import ARow from "ant-design-vue/es/grid/Row";
           'content':'',
         },
         addInfo:'',
+      }
     },
 
     computed: {
@@ -200,11 +201,11 @@ import ARow from "ant-design-vue/es/grid/Row";
       },
       onChange(current){
         this.current=current;
-      }
+      },
       clickJump(record) {
         console.log(record)
       },
-    }
+    },
     mounted() {
       getPost({page: this.current}).then((response)=>{
         console.log(response);

@@ -147,7 +147,8 @@ import {mapGetters} from 'vuex'
 import {Button} from 'ant-design-vue'
 import {PageView} from '@/layouts'
 import {Radar} from '@/components'
-import {getInfo, modifyPwd, getMyPost, getMyLike} from '@/api/user'
+import {getInfo} from '@/api/user'
+import {modifyPwd, getMyPost, getMyLike} from '@/api/userInfo'
 import {deleteTreehole} from '@/api/Treehole'
 import ARow from "ant-design-vue/es/grid/Row";
 import ACol from "ant-design-vue/es/grid/Col";
@@ -289,10 +290,10 @@ export default {
       },
       onChange1(current){
         this.current1=current;
-      }
+      },
       onChange2(current){
         this.current2=current;
-      }
+      },
       onClickDelete (id) {
         console.log(id)
         this.todelete = id
@@ -335,7 +336,7 @@ export default {
         this.userDataShow = this.userData
       })
 
-      getMyPost({page: this.current}).then((response)=>{
+      getMyPost({page: this.current1}).then((response)=>{
         console.log(response);
         console.log(this.page);
         this.allPostData=response.data;
@@ -343,7 +344,7 @@ export default {
         this.totalPage1=this.allPostData.totalPage
 
       })
-      getMyLike({page: this.current}).then((response)=>{
+      getMyLike({page: this.current2}).then((response)=>{
         console.log(response);
         console.log(this.page);
         this.allLikeData=response.data;

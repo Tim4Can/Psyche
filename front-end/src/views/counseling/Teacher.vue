@@ -7,18 +7,13 @@
           <a-list-item slot="renderItem" slot-scope="item">
             <a-card class="ant-pro-pages-list-projects-card" hoverable :loading="loading">
               <img slot="cover" :src="item.headPortrait" :alt="item.title"/>
-              <template class="ant-card-actions" slot="actions">
-              </template>
               <a-card-meta :title="'老师姓名：'+item.name">
                 <template slot="description">
                   <ellipsis :length="70">{{ item.introduction }}</ellipsis>
                 </template>
               </a-card-meta>
               <div class="cardItemContent" style="">
-                <span>{{ item.updatedAt | fromNow }}</span>
-                <router-link :to="{ name: 'teacherDetail', params:{ details: item} }">
-                  <a-button type="primary" block>预约</a-button>
-                </router-link>
+                <router-link :to="{ name: 'teacherDetail', params:{ details: item} }">预约</router-link>
               </div>
             </a-card>
           </a-list-item>
@@ -32,7 +27,6 @@
 import moment from 'moment'
 import { TagSelect, StandardFormRow, Ellipsis, AvatarList } from '@/components'
 import Fuse from 'fuse.js'
-import teacherDetail from './components/teacherDetail'
 import { getTeacher } from '@/api/teacher'
 import {PageView} from '@/layouts'
 
@@ -95,17 +89,6 @@ export default {
     this.getList()
   },
   methods: {
-
-   refreshTable() {
-      this.loading = true
-      getTeacher().then(response => {
-      console.log('sssss',response.data)
-      pageData = response.data
-      this.loading = false
-      this.data = pageData
-      })
-
-    },
     getList () {
           // this.$http.get('/list/article', { params: { count: 12 } }).then(res => {
           //   console.log('res', res)

@@ -19,7 +19,7 @@
         </span>
         <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
           <a-menu-item key="0">
-            <router-link :to="{ name: 'staffManage' }">
+            <router-link :to="{ name: 'myPage' }">
               <a-icon type="user"/>
               <span>个人中心</span>
             </router-link>

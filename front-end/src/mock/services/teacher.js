@@ -6,7 +6,7 @@ const allTeacher = () => {
     data: [{
 
       'name': '李一',
-      'headPotrait': '/avatar2.jpg',
+      'headPortrait': '/avatar2.jpg',
       'type': '修理类型：2',
       'state': '0',
       'introduction':'被看见、被听见、被理解、被接受。',
@@ -16,7 +16,7 @@ const allTeacher = () => {
       {
 
         'name': 'ww',
-        'headPotrait': '/avatar.jpg',
+        'headPortrait': '/avatar.jpg',
         'type': '修理类型:2',
         'state': '1',
         'introduction':'被看见、被听见、被理解、被接受。',
@@ -27,7 +27,7 @@ const allTeacher = () => {
       {
 
         'name': 'vf',
-        'headPotrait': '/avatar.jpg',
+        'headPortrait': '/avatar.jpg',
         'type': '修理类型:2',
         'state': '2',
         'introduction':'被看见、被听见、被理解、被接受。',
@@ -38,7 +38,7 @@ const allTeacher = () => {
       {
 
         'name': 'fh',
-        'headPotrait': '/avatar.jpg',
+        'headPortrait': '/avatar.jpg',
         'type': '修理类型:2',
         'state': '0',
         'introduction':'被看见、被听见、被理解、被接受。',
@@ -49,7 +49,7 @@ const allTeacher = () => {
       {
 
         'name': 'fff',
-        'headPotrait': '/avatar.jpg',
+        'headPortrait': '/avatar.jpg',
         'type': '修理类型:2',
         'state': '1',
         'introduction':'把手损坏，油漆脱落',//报修单详细信息的损坏描述部分
@@ -60,7 +60,7 @@ const allTeacher = () => {
       {
 
         'name': 'ddd',
-        'headPotrait': '/avatar.jpg',
+        'headPortrait': '/avatar.jpg',
         'type': '修理类型:2',
         'state': '2',
         'introduction':'把手损坏，油漆脱落',//报修单详细信息的损坏描述部分
@@ -71,7 +71,7 @@ const allTeacher = () => {
       {
 
         'name': 'sfgd',
-        'headPotrait': '/avatar.jpg',
+        'headPortrait': '/avatar.jpg',
         'type': '修理类型:2',
         'state': '0',
         'introduction':'把手损坏，油漆脱落',//报修单详细信息的损坏描述部分
@@ -82,7 +82,7 @@ const allTeacher = () => {
       {
 
         'name': 'dg',
-        'headPotrait': '/avatar.jpg',
+        'headPortrait': '/avatar.jpg',
         'type': '修理类型:2',
         'state': '1',
         'introduction':'把手损坏，油漆脱落',//报修单详细信息的损坏描述部分
@@ -93,7 +93,7 @@ const allTeacher = () => {
       {
 
         'name': 'sgr',
-        'headPotrait': '/avatar.jpg',
+        'headPortrait': '/avatar.jpg',
         'type': '修理类型:2',
         'state': '2',
         'introduction':'把手损坏，油漆脱落',//报修单详细信息的损坏描述部分

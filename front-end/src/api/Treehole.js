@@ -32,7 +32,7 @@ export function postDetail(data) {
   })
 }
 
-export function addTreehole(parameter) {
+export function sendTreehole(parameter) {
   return axios({
     url: api.sendTreehole,
     method: 'post',

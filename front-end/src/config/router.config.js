@@ -34,9 +34,9 @@ export const asyncRouterMap = [
             }
           },
           {
-            path: '/treeHole/postDetail/:id',
-            name: 'PostDetail',
-            hidden: true,
+            path: '/treeHole/PostDetail/:id',
+            name: 'postDetail',
+            //hidden: true,
             component: () => import( '@/views/treeHole/PostDetail' ),
             meta: {
               title: '详情', keepAlive: false,icon: 'copy'
@@ -126,7 +126,7 @@ export const asyncRouterMap = [
             meta: {title: '我的预约', keepAlive: false, icon: 'snippets'}
           },
           {
-            path: '/teacher/components/:details',
+            path: '/counseling/components/:details',
             name: 'teacherDetail',
             hidden: true,
             component: () => import( '@/views/counseling/components/TeacherDetail' ),
@@ -136,7 +136,7 @@ export const asyncRouterMap = [
           },
         ]
       },
-
+      
       {
         path: '/user/MyPage',
         name: 'myPage',
