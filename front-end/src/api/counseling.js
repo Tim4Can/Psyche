@@ -30,11 +30,11 @@ export function cancelAppointment (data) {
   })
 }
 
-export function chooseTime (data) {
+export function chooseTime (parameter) {
   return axios({
     url: api.schedule,
     method: 'post',
-    data: data,
+    data: parameter,
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
     }

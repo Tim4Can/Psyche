@@ -108,7 +108,7 @@
           </a-list-item>
         </a-list>
         <!-- <div id="pagination" >
-          <a-pagination @change="onChange1" :current="current" :totol="this.totalPage1*10" />
+          <a-pagination @change="onChange1" :current="current" :total="totalPage1" />
         </div> -->
         </template>
       <template v-else="noTitleKey === '收藏'">
@@ -131,7 +131,7 @@
           </a-list-item>
         </a-list>
         <!-- <div id="pagination" >
-          <a-pagination @change="onChange2" :current="current" :totol="this.totalPage2*10" />
+          <a-pagination @change="onChange2" :current="current" :total="totalPage2" />
         </div> -->
       </template>
        </a-card>
@@ -197,8 +197,8 @@ export default {
         allLikeData: [],
         totalPage1: '',
         totalPage2: '',
-        current1: 0,
-        current2: 0,
+        current1: 1,
+        current2: 1,
         data,
         columns,
         user: {},
@@ -290,10 +290,25 @@ export default {
       },
       onChange1(current){
         this.current1=current;
-      },
+        getMyPost(this.current1).then((response)=>{
+        console.log(response);
+        console.log(this.page);
+        this.allPostData=response.data;
+        this.postData=this.allPostData.postData;
+        this.totalPage1=this.allPostData.totalPage
+
+      })
+     },
       onChange2(current){
         this.current2=current;
-      },
+        getMyLike(this.current2).then((response)=>{
+        console.log(response);
+        console.log(this.page);
+        this.allLikeData=response.data;
+        this.likeData=this.allLikeData.likeData;
+        this.totalPage2=this.allLikeData.totalPage //总页数
+      })
+     },
       onClickDelete (id) {
         console.log(id)
         this.todelete = id
@@ -336,19 +351,19 @@ export default {
         this.userDataShow = this.userData
       })
 
-      getMyPost({page: this.current1}).then((response)=>{
+      getMyPost(this.current1).then((response)=>{
         console.log(response);
         console.log(this.page);
         this.allPostData=response.data;
-        this.postData=this.allPostData.Data;
+        this.postData=this.allPostData.postData;
         this.totalPage1=this.allPostData.totalPage
 
       })
-      getMyLike({page: this.current2}).then((response)=>{
+      getMyLike(this.current2).then((response)=>{
         console.log(response);
         console.log(this.page);
         this.allLikeData=response.data;
-        this.likeData=this.allLikeData.Data;
+        this.likeData=this.allLikeData.likeData;
         this.totalPage2=this.allLikeData.totalPage //总页数
       })
     }

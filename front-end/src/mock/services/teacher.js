@@ -3,7 +3,7 @@ import Mock from 'mockjs2'
 
 const allTeacher = (data) => {
   let teacher= {
-    '0': [
+    '1': [
       {
         'id': '1',
         'name': '李一',
@@ -92,7 +92,7 @@ const allTeacher = (data) => {
           'telNumber': '12332532',//报修用户的电话
         },
     ],
-    '1':[
+    '2':[
       {
         'id': '9',
         'name': 'sgr',
@@ -106,7 +106,10 @@ const allTeacher = (data) => {
        ]
   }
   return {
-      data: teacher[data.body]
+      data: {
+        totalPage:50,
+        teacher:teacher[data.body]
+      }
   }
 
 }

@@ -29,9 +29,9 @@
             </a-modal>
           </template>
         </a-table>
-        <!-- <div id="pagination" >
-          <a-pagination @change="onChange" :current="current" :totol="this.totalPage*10" />
-        </div> -->
+        <template>
+          <a-pagination @change="onChange" :current="current" :total="totalPage" />
+        </template>
       </template>
     </a-card>
   </page-view>
@@ -100,7 +100,8 @@ export default {
         rDataShow,
         deleteInfo:'',
         columns,
-        current: 0,
+        current: 1,
+        totalPage:'',
         visible2: false,
         todelete:'',
         form: this.$form.createForm(this)
@@ -155,16 +156,22 @@ export default {
       },
       onChange(current){
         this.current=current;
-      }
-    },
-    mountend(){
-      getMyReserve({page: this.current}).then((response)=>{
+        getMyReserve(this.current).then((response)=>{
         console.log(response);
         console.log(this.page);
         this.rData=response.data;
-        this.rDataShow=this.rData.Data;
+        this.rDataShow=this.rData.reserve;
         this.totalPage=this.rData.totalPage
-
+      })
+     }
+    },
+    mountend(){
+      getMyReserve(this.current).then((response)=>{
+        console.log(response);
+        console.log(this.page);
+        this.rData=response.data;
+        this.rDataShow=this.rData.reserve;
+        this.totalPage=this.rData.totalPage
       })
     }
   };

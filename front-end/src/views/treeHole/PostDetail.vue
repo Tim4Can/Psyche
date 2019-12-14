@@ -1,6 +1,6 @@
 <template>
   <page-view title="帖子详情">
-    <a-affix :offsetTop="this.top">
+    <a-affix>
       <a-card >
         <h3>{{post_title}}</h3>
       </a-card>
@@ -27,9 +27,9 @@
             </a-comment>
           </a-list-item>
       </a-list>
-      <!-- <div id="pagination" >
-        <a-pagination @change="onChange" :current="current" :totol="this.totalPage*10" />
-      </div> -->
+      <template>
+        <a-pagination @change="onChange" :current="current" :total="totalPage" />
+      </template>
     </a-card>
     </template>
     <template>
@@ -83,6 +83,8 @@ export default {
         submitting: false,
         value: '',
         moment,
+        current: 1,
+        totalPage:'',
         data: [],
         allData: [],
         post_title: '',
@@ -129,9 +131,9 @@ export default {
       handleChange(e) {
         this.value = e.target.value;
       },
-    },
-    mounted() {
-      postDetail({}).then((response)=>{
+      onChange(current){
+         this.current=current;
+         postDetail(this.postID).then((response)=>{
         console.log(response);
         console.log(this.postID);
         this.allData=response.data;
@@ -139,7 +141,20 @@ export default {
         this.post_content=this.allData.content;
         this.post_sendTime=this.allData.sendTime;
         this.post_headPortrait=this.allData.headPortrait;
-        this.data=this.allData.data;
+        this.data=this.allData.comment;
+       })
+      },
+    },
+    mounted() {
+      postDetail(this.postID).then((response)=>{
+        console.log(response);
+        console.log(this.postID);
+        this.allData=response.data;
+        this.post_title=this.allData.title;
+        this.post_content=this.allData.content;
+        this.post_sendTime=this.allData.sendTime;
+        this.post_headPortrait=this.allData.headPortrait;
+        this.data=this.allData.comment;
       })
     },
 }

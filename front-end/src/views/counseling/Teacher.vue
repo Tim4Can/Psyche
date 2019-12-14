@@ -18,6 +18,9 @@
             </a-card>
           </a-list-item>
         </a-list>
+        <template style="right">
+          <a-pagination @change="onChange" :current="current" :total="totalPage" />
+        </template>
       </div>
     </div>
   </page-view>
@@ -50,7 +53,8 @@ export default {
       data: [],
       allData: [],
       loading: true,
-      current: 0,
+      current: 1,
+      total: '',
     }
   },
   filters: {
@@ -62,6 +66,16 @@ export default {
     this.getList()
   },
   methods: {
+    onChange(current){
+        this.current=current;
+        getTeacher(this.current).then(response => {
+        console.log('sssss',response.data.teacher)
+        this.allData = response.data
+        this.loading = false
+        this.data = this.allData.teacher
+        this.totalPage=this.allData.totalPage
+      })
+    },
     getList () {
           // this.$http.get('/list/article', { params: { count: 12 } }).then(res => {
           //   console.log('res', res)
@@ -70,10 +84,11 @@ export default {
           //   pageData = this.data
           // })
     getTeacher(this.current).then(response => {
-        console.log('sssss',response.data)
+        console.log('sssss',response.data.teacher)
         this.allData = response.data
         this.loading = false
-        this.data = this.allData
+        this.data = this.allData.teacher
+        this.totalPage=this.allData.totalPage
       })
 
     },

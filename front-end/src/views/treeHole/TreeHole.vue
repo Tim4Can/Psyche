@@ -2,8 +2,6 @@
   <page-view title="全部帖子">
     <div id="layout">
       <a-layout>
-        <!-- input bar end -->
-        <!-- refresh button -->
         <a-row :gutter="24">
           <a-col :span="16" style="text-align: right">
             <div style="margin-top: 2.5rem">
@@ -14,27 +12,11 @@
                 icon="plus"
               >发帖
               </a-button>
-              <a-button
-                size="default"
-                type="primary"
-                style="text-align: right"
-                @click="onClickRefresh"
-                icon="reload"
-              >刷新
-              </a-button>
-            </div>
-          </a-col>
-
-          <a-col :span="8" style="text-align: right">
-            <div >
-
             </div>
           </a-col>
         </a-row>
       </a-layout>
     </div>
-      <!-- input bar end -->
-      <!-- refresh button -->
 
       <!-- table -->
       <a-card title="全部">
@@ -48,18 +30,18 @@
                 <template slot="description">
                   <ellipsis :length="70">{{ item.sendTime }}</ellipsis>
                 </template>
-                <template slot="toDetail" slot-scope="text, record">
+                <template slot="toDetail">
                 <div>
-                  <router-link :to="{ name: 'PostDetail', params:{ id: getID(record.id)} }">帖子详情</router-link>
+                  <router-link :to="{ name: 'PostDetail', params:{ id: item.id} }">帖子详情</router-link>
                 </div>
                 </template>
               </a-card-meta>
             </a-card>
           </a-list-item>
         </a-list>
-        <!-- <div id="pagination" >
-          <a-pagination @change="onChange" :current="current" :totol="this.totalPage*10" />
-        </div> -->
+        <template>
+          <a-pagination @change="onChange" :current="current" :total="totalPage" />
+        </template>
       </a-card>
       <!-- table end -->
 
@@ -125,7 +107,8 @@ import ARow from "ant-design-vue/es/grid/Row";
         Data: [],
         allData: [],
         totalPage: '',
-        current: 0,
+        current: 1,
+        totalPage: '',
         form: this.$form.createForm(this),
         loading: true,
         visible: false,
@@ -201,17 +184,24 @@ import ARow from "ant-design-vue/es/grid/Row";
       },
       onChange(current){
         this.current=current;
+        getPost(this.current).then((response)=>{
+        console.log(response);
+        console.log(this.page);
+        this.allData=response.data;
+        this.Data=this.allData.post; //当前页的树洞信息
+        this.totalPage=this.allData.totalPage //总页数
+      })
       },
       clickJump(record) {
         console.log(record)
       },
     },
     mounted() {
-      getPost({page: this.current}).then((response)=>{
+      getPost(this.current).then((response)=>{
         console.log(response);
         console.log(this.page);
         this.allData=response.data;
-        this.Data=this.allData.Data; //当前页的树洞信息
+        this.Data=this.allData.post; //当前页的树洞信息
         this.totalPage=this.allData.totalPage //总页数
 
       })
