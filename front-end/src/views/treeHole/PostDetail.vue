@@ -49,6 +49,16 @@
               </a-button>
             </a-form-item>
           </div>
+          <div slot="content">
+            <a-form-item>
+              <a-textarea :rows="4" @change="handleChange" :value="value"></a-textarea>
+            </a-form-item>
+            <a-form-item>
+              <a-button htmlType="submit" :loading="submitting" @click="handleSubmit" type="primary">
+                回复
+              </a-button>
+            </a-form-item>
+          </div>
         </a-comment>
       </div>
     </template>

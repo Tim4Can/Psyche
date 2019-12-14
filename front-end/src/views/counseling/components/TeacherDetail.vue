@@ -2,9 +2,9 @@
   <page-view title="老师信息">
     <a-card>
      <detail-list size="small" :col="1" class="detail-layout">
-        <detail-list-item term="老师姓名">{{this.details.name}}</detail-list-item>
-       <detail-list-item term="详细描述">{{this.details.introduction}}</detail-list-item>
-       <detail-list-item term="咨询地址">{{this.details.address}}</detail-list-item>
+        <detail-list-item term="老师姓名">{{name}}</detail-list-item>
+        <detail-list-item term="详细描述">{{introduction}}</detail-list-item>
+        <detail-list-item term="咨询地址">{{address}}</detail-list-item>
       </detail-list>
     </a-card>
   </page-view>
@@ -15,32 +15,47 @@
 import { mixinDevice } from '@/utils/mixin'
 import { PageView } from '@/layouts'
 import DetailList from '@/components/tools/DetailList'
-import {getTeacher} from '@/api/teacher'
+import {postTeacherDetail} from '@/api/teacher'
+import {chooseTime} from '@/api/counseling'
 import ACol from "ant-design-vue/es/grid/Col";
 import {mapGetters} from 'vuex'
 
 const DetailListItem = DetailList.Item
-console.log("DetailListItem",DetailListItem)
 
 export default {
-    inject: ['reload'],
-    created(){
+  inject: ['reload'],
+  created(){
 
-    },
-    name: 'teacherDetail',
-    components: {
-      ACol,
-      PageView,
-      DetailList,
-      DetailListItem
-    },
+  },
+  name: 'teacherDetail',
+  components: {
+     ACol,
+     PageView,
+     DetailList,
+     DetailListItem
+  },
   data () {
     return {
-
-      details: this.$route.params.details,
+      teacherID: this.$route.params.id,
+      DetailData:'',
+      TimeData:'',
+      name:'',
+      introduction:'',
+      address:'',
 
     }
   },
+  mounted(){
+    postTeacherDetail(this.teacherID).then((response)=>{
+      console.log(response.data);
+      //console.log(this.teacherID);
+      this.DetailData = response.data;
+      this.name=this.DetailData.name;
+      this.introduction=this.DetailData.introduction;
+      this.address=this.DetailData.address;
+    })
+
+  }
 }
 
 </script>

@@ -7,137 +7,20 @@ const allPost = () => {
   return {
     data: [
       {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-100',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-200',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-300',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-400',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-500',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-600',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-700',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-800',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-900',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-110',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-120',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
+        'totalPage': '10',
+        'row':[
+          {
+            'title': '哈哈哈',
+            'content': 'hzdifhdgfg',
+            'sendTime': '2019-12-12',
+            'key': 'tf-100',
+            'model': 'model_1',
+            'type': '履带',
+            'price': 12,
+            'num': 10,
+            'warehouse': '嘉定仓库',
+            'warehouseID': '1234567890'
+          },
       {
         'title': '哈哈哈',
         'content': 'hzdifhdgfg',
@@ -147,8 +30,8 @@ const allPost = () => {
         'type': '螺丝',
         'price': 1,
         'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
+        'warehouse': '五角场仓库',
+        'warehouseID': '1234567890'
       },
       {
         'title': '哈哈哈',
@@ -159,8 +42,8 @@ const allPost = () => {
         'type': '履带',
         'price': 12,
         'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
+        'warehouse': '嘉定仓库',
+        'warehouseID': '1234567890'
       },
       {
         'title': '哈哈哈',
@@ -171,8 +54,8 @@ const allPost = () => {
         'type': '螺丝',
         'price': 1,
         'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
+        'warehouse': '五角场仓库',
+        'warehouseID': '1234567890'
       },
       {
         'title': '哈哈哈',
@@ -183,56 +66,8 @@ const allPost = () => {
         'type': '履带',
         'price': 12,
         'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-170',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-180',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-190',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-200',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
+        'warehouse': '嘉定仓库',
+        'warehouseID': '1234567890'
       },
       {
         'title': '哈哈哈',
@@ -243,80 +78,8 @@ const allPost = () => {
         'type': '螺丝',
         'price': 1,
         'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-210',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-220',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-230',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-240',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-250',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-260',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
+        'warehouse': '五角场仓库',
+        'warehouseID': '1234567890'
       },
       {
         'title': '哈哈哈',
@@ -327,8 +90,8 @@ const allPost = () => {
         'type': '履带',
         'price': 12,
         'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
+        'warehouse': '嘉定仓库',
+        'warehouseID': '1234567890'
       },
       {
         'title': '哈哈哈',
@@ -339,58 +102,10 @@ const allPost = () => {
         'type': '螺丝',
         'price': 1,
         'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-290',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-300',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-310',
-        'model': 'model_1',
-        'type': '履带',
-        'price': 12,
-        'num': 10,
-        'warehouse':'嘉定仓库',
-        'warehouseID':'1234567890'
-      },
-      {
-        'title': '哈哈哈',
-        'content': 'hzdifhdgfg',
-        'sendTime': '2019-12-12',
-        'key': 'tf-320',
-        'model': 'model_2',
-        'type': '螺丝',
-        'price': 1,
-        'num': 100,
-        'warehouse':'五角场仓库',
-        'warehouseID':'1234567890'
-      },
-
+        'warehouse': '五角场仓库',
+        'warehouseID': '1234567890'
+      },]
+     }
     ]
   }
 }
