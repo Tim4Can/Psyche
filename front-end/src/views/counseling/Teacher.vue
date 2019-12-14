@@ -13,7 +13,7 @@
                 </template>
               </a-card-meta>
               <div class="cardItemContent" style="">
-                <router-link :to="{ name: 'teacherDetail', params:{ details: item} }">预约</router-link>
+                <router-link :to="{ name: 'teacherDetail', params:{ id: item.id} }">预约</router-link>
               </div>
             </a-card>
           </a-list-item>
@@ -50,34 +50,7 @@ export default {
       data: [],
       allData: [],
       loading: true,
-      pagination:{
-        pageSize: 8,
-        showTotal: (total, range) => {
-          console.log("range",range)
-          if(range[1] == 0){
-            return `0-0 of 0 items`
-          }
-          return `${range[0]}-${range[1]} of ${total} items`
-          },
-        defaultCurrent: 1,
-        showQuickJumper: true,
-      },
-      idFilterValue: '',
-      selection: '',
-      fusejsOptions: {
-        shouldSort: true,
-        tokenize: true,
-        threshold: 1.0,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        keys: [
-          "title",
-          "description"
-        ]
-
-      },
+      current: 0,
     }
   },
   filters: {
@@ -96,28 +69,15 @@ export default {
           //   this.loading = false
           //   pageData = this.data
           // })
-    getTeacher().then(response => {
-      console.log('sssss',response.data)
-        pageData = response.data
+    getTeacher(this.current).then(response => {
+        console.log('sssss',response.data)
+        this.allData = response.data
         this.loading = false
-        this.data = pageData
+        this.data = this.allData
       })
 
     },
 
-    filterOnce(){
-      if(!this.idFilterValue){
-        var result = pageData
-      }
-      else{
-        var oldData = pageData
-      var options = this.fusejsOptions
-      var fuse = new Fuse(oldData, options)
-      var result = fuse.search(this.idFilterValue)
-      console.log(result)
-
-      }
-    },
   }
 }
 </script>
