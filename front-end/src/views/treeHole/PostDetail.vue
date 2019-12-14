@@ -1,15 +1,13 @@
 <template>
   <page-view title="帖子详情">
-    <a-affix>
       <a-card >
         <h3>{{post_title}}</h3>
       </a-card>
-    </a-affix>
     <a-card style="width:100%">
-      <a-card-meta title='post.content' description='post_sendTime'>
-        <img style="width:60px"
+      <a-card-meta :title="post_content" :description="post_sendTime">
+        <a-avatar
            slot="avatar"
-           src="post_headPortrait"
+           :src="post_headPortrait"
         />
       </a-card-meta>
       <p>楼主</P>
@@ -27,9 +25,9 @@
             </a-comment>
           </a-list-item>
       </a-list>
-      <template>
+      <div style="margin-top:20px">
         <a-pagination @change="onChange" :current="current" :total="totalPage" />
-      </template>
+      </div>
     </a-card>
     </template>
     <template>
@@ -45,17 +43,7 @@
             </a-form-item>
             <a-form-item>
               <a-button htmlType="submit" :loading="submitting" @click="handleSubmit" type="primary">
-                回复
-              </a-button>
-            </a-form-item>
-          </div>
-          <div slot="content">
-            <a-form-item>
-              <a-textarea :rows="4" @change="handleChange" :value="value"></a-textarea>
-            </a-form-item>
-            <a-form-item>
-              <a-button htmlType="submit" :loading="submitting" @click="handleSubmit" type="primary">
-                回复
+                评论
               </a-button>
             </a-form-item>
           </div>
@@ -67,7 +55,7 @@
 
 <script>
 import { PageView } from '@/layouts'
-import { postDetail, sendComment } from '@/api/Treehole'
+import { postDetail, sendComment, getComment } from '@/api/Treehole'
 import Fuse from 'fuse.js'
 import moment from 'moment';
 
@@ -93,11 +81,16 @@ export default {
         post_headPortrait: '',//楼主的头像
         postID: this.$route.params.id,
         sendInfo:'',//评论是否成功信息
+        comment:{
+          'treeholeID':'',
+          'content':'',
+        }
+
       };
    },
    methods: {
-      async addComment(){
-        sendComment(this.value).then((response) => {
+      addComment(){
+        sendComment(this.comment).then((response) => {
         this.sendInfo = response.info1
         if(this.sendInfo === 'ok'){
           this.$notification.open({
@@ -124,6 +117,8 @@ export default {
         this.submitting = true;
         setTimeout(() => {
           this.submitting = false;
+          this.comment.treeholeID=this.postID,
+          this.comment.content=this.value,
           addComment(),
           this.value = '';
         }, 1000);
@@ -132,17 +127,14 @@ export default {
         this.value = e.target.value;
       },
       onChange(current){
-         this.current=current;
-         postDetail(this.postID).then((response)=>{
+        this.current=current;
+        getComment(this.current).then((response)=>{
         console.log(response);
         console.log(this.postID);
         this.allData=response.data;
-        this.post_title=this.allData.title;
-        this.post_content=this.allData.content;
-        this.post_sendTime=this.allData.sendTime;
-        this.post_headPortrait=this.allData.headPortrait;
         this.data=this.allData.comment;
-       })
+        this.totalPage=this.allData.totalPage;
+      })
       },
     },
     mounted() {
@@ -154,7 +146,13 @@ export default {
         this.post_content=this.allData.content;
         this.post_sendTime=this.allData.sendTime;
         this.post_headPortrait=this.allData.headPortrait;
+      }),
+      getComment(this.postID).then((response)=>{
+        console.log(response);
+        console.log(this.postID);
+        this.allData=response.data;
         this.data=this.allData.comment;
+        this.totalPage=this.allData.totalPage;
       })
     },
 }

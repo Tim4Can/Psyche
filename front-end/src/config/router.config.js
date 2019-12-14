@@ -20,15 +20,15 @@ export const asyncRouterMap = [
       // warehouse
       {
         path: '/treeHole',
-        name: 'tree',
-        redirect: '/treeHole/treeHole',
+        name: 'treehole',
+        redirect: '/treeHole/Post',
         component: RouteView,
         meta: {title: '树洞', keepAlive: true, icon: chat},
         children: [
           {
-            path: '/treeHole/treeHole',
-            name: 'TreeHole',
-            component: () => import( '@/views/treeHole/TreeHole' ),
+            path: '/treeHole/post',
+            name: 'post',
+            component: () => import( '@/views/treeHole/Post' ),
             meta: {
               title: '帖子', keepAlive: false, icon: 'exception'
             }
@@ -36,18 +36,11 @@ export const asyncRouterMap = [
           {
             path: '/treeHole/detail/:id',
             name: 'postDetail',
-            //hidden: true,
+            hidden: true,
             component: () => import( '@/views/treeHole/PostDetail' ),
             meta: {
               title: '详情', keepAlive: false,icon: 'copy'
             }
-          },
-          {
-            path: '/warehouse/map',
-            name: 'Map',
-            hidden: true,
-            component: () => import( '@/views/warehouse/Map' ),
-            meta: {title: '地图', keepAlive: false, icon: 'picture'}
           }
         ]
       },

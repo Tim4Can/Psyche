@@ -6,6 +6,7 @@ const api = {
   sendTreehole: 'Treehole/sendTreehole',
   deleteTreehole: 'Treehole/deleteTreehole',
   sendComment: 'Treehole/sendComment',
+  comment:'Treehole/comment',
 }
 
 export default api
@@ -24,6 +25,17 @@ export function getPost (data) {
 export function postDetail(data) {
   return axios({
     url: api.postDetail,
+    method: 'post',
+    data: data,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+}
+
+export function getComment(data) {
+  return axios({
+    url: api.comment,
     method: 'post',
     data: data,
     headers: {

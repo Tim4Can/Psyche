@@ -10,7 +10,14 @@
     <a-card style="margin-top:20px">
          <a-row :gutter="16">
             <a-col :span="8"><h2>选择预约时间</h2></a-col>
-            <a-col :span="8"><a-button style="background:green"  @click="reserve" >确定预约</a-button></a-col>
+            <a-col :span="8">
+              <a-button
+                style="margin-right : 1rem"
+                @click="reserve()"
+                type="primary"
+              >确定预约
+              </a-button>
+            </a-col>
          </a-row>
          <a-row :gutter="16">
               <a-card>
@@ -33,86 +40,86 @@
                 <a-row>
                 <a-col :span="2">
                   <h4>周一</h4>
-                  <a-button-group @click="setMonday">
+                  <a-button-group @click="setMonday()">
                   <a-row>
-                    <a-button @click="setOne" />
+                    <a-button @click="setOne()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setTwo" />
+                    <a-button @click="setTwo()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setThree" />
+                    <a-button @click="setThree()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setFour" />
+                    <a-button @click="setFour()" />
                   </a-row>
                   </a-button-group>
                 </a-col>
                 <a-col :span="2">
                   <h4>周二</h4>
-                  <a-button-group @click="setTuesday">
+                  <a-button-group @click="setTuesday()">
                   <a-row>
-                    <a-button  @click="setOne" />
+                    <a-button  @click="setOne()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setTwo" />
+                    <a-button @click="setTwo()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setThree" />
+                    <a-button @click="setThree()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setFour" />
+                    <a-button @click="setFour()" />
                   </a-row>
                   </a-button-group>
                 </a-col>
                 <a-col :span="2">
                   <h4>周三</h4>
-                  <a-button-group @click="setWednesday">
+                  <a-button-group @click="setWednesday()">
                   <a-row>
-                    <a-button  @click="setOne" />
+                    <a-button  @click="setOne()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setTwo" />
+                    <a-button @click="setTwo()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setThree" />
+                    <a-button @click="setThree()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setFour" />
+                    <a-button @click="setFour()" />
                   </a-row>
                   </a-button-group>
                 </a-col>
                 <a-col :span="2">
                   <h4>周四</h4>
-                  <a-button-group @click="setThursday">
+                  <a-button-group @click="setThursday()">
                   <a-row>
-                    <a-button  @click="setOne" />
+                    <a-button  @click="setOne()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setTwo" />
+                    <a-button @click="setTwo()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setThree" />
+                    <a-button @click="setThree()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setFour" />
+                    <a-button @click="setFour()" />
                   </a-row>
                   </a-button-group>
                 </a-col>
                 <a-col :span="2">
                   <h4>周五</h4>
-                  <a-button-group @click="setFriday">
+                  <a-button-group @click="setFriday()">
                   <a-row>
-                    <a-button @click="setOne" />
+                    <a-button @click="setOne()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setTwo"/>
+                    <a-button @click="setTwo()"/>
                   </a-row>
                   <a-row>
-                    <a-button @click="setThree" />
+                    <a-button @click="setThree()" />
                   </a-row>
                   <a-row>
-                    <a-button @click="setFour" />
+                    <a-button @click="setFour()" />
                   </a-row>
                   </a-button-group>
                 </a-col>
