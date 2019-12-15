@@ -1,25 +1,52 @@
 <template>
-  <page-view title="个人中心">
+  <page-view :avatar="avatar" :title="false">
+    <div slot="headerContent">
+      <div class="title">{{ timeFix }}，{{ user.name }}！</div>
+    </div>
     <a-row :gutter="24">
-      <a-col :span="6">
-        <a-card  size="small">
-        <a-table :columns="columns" :dataSource="data" :pagination="false">
-        </a-table>
-        <br/>
-        <div>
-            <a-button type="primary" @click="showModal">修改密码</a-button>
-            <a-modal
-              title="修改密码"
-              :visible="visible1"
-              @ok="handleOk"
-              :confirmLoading="confirmLoading"
-              @cancel="handleCancel"
-            >
+      <!--个人信息-->
+        <a-col
+          style="padding: 0 12px"
+          :xl="8"
+          :lg="24"
+          :md="24"
+          :sm="24"
+          :xs="24">
+          <!--个人信息-->
+          <a-card
+            style="margin-bottom: 24px; margin-top: 0px"
+            :bordered="false"
+            title="个人信息"
+            :body-style="{ padding: 0 }">
+            <a-card>
+              <a-row style="margin-bottom: 12px">
+                <a-icon type="idcard" theme="twoTone" twoToneColor="#3A5FCD"/>
+                <strong> 学号：</strong>
+                {{ userInfo.id }}
+              </a-row>
+              <a-row style="margin-bottom: 12px">
+                <a-icon type="tag" theme="twoTone" twoToneColor="#3A5FCD"/>
+                <strong> 姓名：</strong>
+                {{ userInfo.name }}
+              </a-row>
+              <a-row style="margin-bottom: 12px">
+                <a-icon type="tag" theme="twoTone" twoToneColor="#3A5FCD"/>
+                <strong> 昵称：</strong>
+                {{ userInfo.name }}
+              </a-row>
+            </a-card>
+          </a-card>
+          <!--密码修改-->
+          <div>
+            <a-row style="text-align: center">
+              <a-button @click="modifyPassButton" type="primary" icon="lock"> 修改密码</a-button>
+              <a-modal v-model="showPasswordForm" footer="">
                 <a-form title="修改密码" @submit="handleSubmit" :form="form">
                   <a-form-item
                     :wrapperCol="{ span: 24 }"
                     style="text-align: center"
                   >
+                    <h3>修改密码</h3>
                   </a-form-item>
                   <a-form-item
                     label="旧密码"
@@ -47,12 +74,20 @@
                       name="new_password"
                       placeholder="请输入新的密码"/>
                   </a-form-item>
+                  <a-form-item
+                    :wrapperCol="{ span: 24 }"
+                    style="text-align: center"
+                  >
+                    <a-button htmlType="submit" type="primary">提交</a-button>
+                    <a-button style="margin-left: 8px" @click="cancelModifyPassword">取消</a-button>
+                  </a-form-item>
+
                 </a-form>
-            </a-modal>
+              </a-modal>
+            </a-row>
           </div>
-        </a-card>
-      </a-col>
-      <a-col :span="17">
+        </a-col>
+      <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
         <a-card
           style="width:100%"
           :tabList="tabListNoTitle"
@@ -132,25 +167,8 @@ import {mapGetters} from 'vuex'
 import {Button} from 'ant-design-vue'
 import HeadInfo from '@/components/tools/HeadInfo'
 import {Radar} from '@/components'
-import {getInfo, modifyPwd, getMyPost, getMyLike} from '@/api/userInfo'
+import {getMyPost, getMyLike} from '@/api/myInfo'
 import AFormItem from "ant-design-vue/es/form/FormItem";
-const columns = [
-    {
-      title:'学号',
-      dataIndex: 'number',
-      key: 'number',
-    },
-    {
-      title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '昵称',
-      dataIndex: 'nickname',
-      key: 'nickname',
-    },
-  ];
 
 export default {
     components: {
@@ -163,12 +181,22 @@ export default {
       },
     data() {
       return {
-        infoData:[],
-        number:'',
-        name:'',
-        nickname:'',
-        columns,
-        visible1: false,
+        timeFix: timeFix(),
+        avatar: '',
+        user: {},
+        projects: [],
+        loading: true,
+        radarLoading: true,
+        activities: [],
+        teams: [],
+        old_password: '',
+        new_password: '',
+        form: this.$form.createForm(this),
+        showPasswordForm: false,
+        new_identity: {
+          id: '',
+          newPassword: '',
+        },
         visible3: false,
         postData: [],
         likeData: [],
@@ -181,17 +209,7 @@ export default {
         loading: true,
         radarLoading: true,
         deleteInfo:'',
-        modifyInfo:'',
-        pwd:{
-          'old_password': '',
-          'new_password': '',
-        },
-        form: this.$form.createForm(this),
         todelete:'',
-        new_identity: {
-          id: '',
-          newPassword: '',
-        },
         confirmLoading: false,
         tabList: [
           {
@@ -218,52 +236,64 @@ export default {
         noTitleKey: '发帖',
       };
     },
+    computed: {
+      userInfo() {
+        return this.$store.getters.userInfo
+      }
+    },
+    created() {
+      this.user = this.userInfo
+      this.avatar = this.userInfo.avatar
+    },
     methods: {
-      onTabChange(key, type) {
-        console.log(key, type);
-        this[type] = key;
+      ...mapGetters(['nickname', 'welcome']),
+      cancelModifyPassword() {
+        console.log('Cancel modify passsword')
       },
-      showModal() {
-        this.visible1 = true;
+      modifyPassButton() {
+        this.showPasswordForm = true;
       },
-      handleOk(e) {
-        this.confirmLoading = true;
-        setTimeout(() => {
-          this.visible1 = false;
-          this.confirmLoading = false;
-          modifyPwd(this.pwd).then((response)=>{
-            this.modifyInfo=response.data.Info;
-            if(this.modifyInfo){
-              this.$message.success('密码修改成功！')
-            }else{
-              this.$message.success('密码修改失败！')
+      cancelModifyPassword() {
+        this.showPasswordForm = false;
+      },
+      handleSubmit(e) {
+        e.preventDefault()
+        this.form.validateFields((err, value) => {
+          if (!err) {
+            if (md5(value.old_password) === this.userInfo.password) {
+              this.new_identity.newPassword = md5(value.new_password)
+              this.new_identity.id = this.userInfo.id
+              console.log(this.new_identity)
+              modifyPassword(this.new_identity).then(() => {
+                this.$message.success('密码修改成功！')
+              })
+              console.log("Pass!")
+            } else {
+              this.$message.error('旧密码输入错误！')
+              console.log("Failed!")
             }
-          })
-        }, 2000);
-      },
-      handleCancel(e) {
-        console.log('Clicked cancel button');
-        this.visible1 = false;
+          }
+        })
+        this.showPasswordForm = false;
       },
       onChange1(current){
         this.current1=current;
-        getMyPost(this.current1).then((response)=>{
-        console.log(response);
-        console.log(this.page);
-        this.allPostData=response.data;
-        this.postData=this.allPostData.postData;
-        this.totalPage1=this.allPostData.totalPage
-
+          getMyPost(this.current1).then((response)=>{
+          console.log(response);
+          console.log(this.page);
+          this.allPostData=response.data;
+          this.postData=this.allPostData.postData;
+          this.totalPage1=this.allPostData.totalPage
       })
      },
      onChange2(current){
         this.current2=current;
         getMyLike(this.current2).then((response)=>{
-        console.log(response);
-        console.log(this.page);
-        this.allLikeData=response.data;
-        this.likeData=this.allLikeData.likeData;
-        this.totalPage2=this.allLikeData.totalPage //总页数
+          console.log(response);
+          console.log(this.page);
+          this.allLikeData=response.data;
+          this.likeData=this.allLikeData.likeData;
+          this.totalPage2=this.allLikeData.totalPage //总页数
       })
      },
      onClickDelete (id) {
@@ -295,12 +325,7 @@ export default {
       },
     },
     mounted(){
-      getInfo(this.userID).then((response)=>{
-        this.infoData=response.data;
-        this.number=this.infoData.number;
-        this.name=this.infoData.name;
-        this.nickname=this.infoData.nickname;
-      })
+      console.log('vuex', this.userInfo)
       getMyPost(this.current1).then((response)=>{
         console.log(response);
         console.log(this.page);

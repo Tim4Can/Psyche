@@ -29,9 +29,9 @@
             </a-modal>
           </template>
         </a-table>
-        <template>
+        <div style="margin-top:20px">
           <a-pagination @change="onChange" :current="current" :total="totalPage" />
-        </template>
+        </div>
       </template>
     </a-card>
   </page-view>

@@ -3,7 +3,7 @@ import { axios } from '@/utils/request'
 
 export function login(data) {
   return axios({
-    url: '/User/login',
+    url: '/auth/login',
     method: 'post',
     data: data
   })
@@ -11,14 +11,14 @@ export function login(data) {
 
 export function getInfo(data) {
   return axios({
-    url: '/User/myInfos',
-    method: 'get',
+    url: '/user/info',
+    method: 'post',
   })
 }
 
 export function logout() {
   return axios({
-    url: '/User/loginOut',
+    url: '/auth/logout',
     method: 'post',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'

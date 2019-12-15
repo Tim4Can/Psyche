@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { login, getInfo, logout } from '@/api/user'
+import { login, getInfo, logout } from '@/api/login'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
