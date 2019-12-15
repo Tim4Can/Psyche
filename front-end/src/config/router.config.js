@@ -119,7 +119,7 @@ export const asyncRouterMap = [
             meta: {title: '我的预约', keepAlive: false, icon: 'snippets'}
           },
           {
-            path: '/counseling/detail/:id',
+            path: '/counseling/detail/:details',
             name: 'teacherDetail',
             hidden: true,
             component: () => import( '@/views/counseling/components/TeacherDetail' ),

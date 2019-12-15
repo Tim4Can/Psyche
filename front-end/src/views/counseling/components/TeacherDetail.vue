@@ -2,9 +2,9 @@
   <page-view title="老师信息">
     <a-card>
      <detail-list size="small" :col="1" class="detail-layout">
-        <detail-list-item term="老师姓名">{{name}}</detail-list-item>
-        <detail-list-item term="详细描述">{{introduction}}</detail-list-item>
-        <detail-list-item term="咨询地址">{{address}}</detail-list-item>
+        <detail-list-item term="老师姓名">{{this.details.name}}</detail-list-item>
+        <detail-list-item term="详细描述">{{this.details.introduction}}</detail-list-item>
+        <detail-list-item term="咨询地址">{{this.details.address}}</detail-list-item>
       </detail-list>
     </a-card>
     <a-card style="margin-top:20px">
@@ -157,12 +157,9 @@ export default {
   },
   data () {
     return {
-      teacherID: this.$route.params.id,
-      DetailData:'',
+      teacherID:this.$route.params.details.id,
+      details: this.$route.params.details,
       TimeData:'',
-      name:'',
-      introduction:'',
-      address:'',
       day:'',
       period:'',
       time:{
@@ -226,10 +223,7 @@ export default {
     postTeacherDetail(this.teacherID).then((response)=>{
       console.log(response.data);
       //console.log(this.teacherID);
-      this.DetailData = response.data;
-      this.name=this.DetailData.name;
-      this.introduction=this.DetailData.introduction;
-      this.address=this.DetailData.address;
+      this.TimeData = response.data;
     })
 
   }

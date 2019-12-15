@@ -13,7 +13,7 @@
                 </template>
               </a-card-meta>
               <div class="cardItemContent" style="">
-                <router-link :to="{ name: 'teacherDetail', params:{ id: item.id} }">预约</router-link>
+                <router-link :to="{ name: 'teacherDetail', params:{ details: item} }">预约</router-link>
               </div>
             </a-card>
           </a-list-item>

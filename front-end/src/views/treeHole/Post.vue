@@ -64,6 +64,19 @@
               >
                 <a-input placeholder="请输入内容" v-model="addmdl.content" id="post_content"/>
               </a-form-item>
+              <a-form-item
+                :labelCol="labelCol"
+                :wrapperCol="wrapperCol"
+                label="是否匿名"
+                hasFeedback
+              >
+                <template>
+                    <a-radio-group name="radioGroup" :defaultValue="1">
+                        <a-radio :value="1">匿名</a-radio>
+                        <a-radio :value="2">不匿名</a-radio>
+                    </a-radio-group>
+                </template>
+              </a-form-item>
             </a-form>
     </a-modal>
     <a-modal
@@ -117,6 +130,7 @@ import { getPost, sendTreehole} from '@/api/Treehole'
         addmdl:{
           'title':'',
           'content':'',
+          'incognito': '',
         },
       }
     },
@@ -162,6 +176,7 @@ import { getPost, sendTreehole} from '@/api/Treehole'
       onClickNewRow(){
         this.visible = false
         this.visible5 = false
+        this.addmdl.incognito=this.value
        sendTreehole(this.addmdl).then((response) => {
         this.addInfo = response.info1
         if(this.addInfo === 'ok'){
