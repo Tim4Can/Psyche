@@ -12,6 +12,7 @@ const allPost = (data) => {
             'content': 'hzdifhdgfg',
             'sendTime': '2019-12-12',
             'headPortrait': '/avatar2.jpg',
+            'postOwner':'李一',
             'key': 'tf-100',
             'model': 'model_1',
             'type': '履带',
@@ -211,6 +212,7 @@ const detail = (data) => {
             'content': 'hzdifhdgfg',
             'sendTime': '2019-12-12',
             'headPortrait': '/avatar2.jpg',
+        'post_owner':'李一',
       },
     '2':
       {

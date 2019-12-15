@@ -10,6 +10,7 @@
            :src="post_headPortrait"
         />
       </a-card-meta>
+      <p>{{post_owner}}</p>
       <p>楼主</P>
     </a-card>
     <template>
@@ -39,8 +40,14 @@
           />
           <div slot="content">
             <a-form-item>
-              <a-textarea :rows="4" @change="handleChange" :value="value"></a-textarea>
+              <a-textarea :rows="4" @change="handleChange" :value="commentContent"></a-textarea>
             </a-form-item>
+            <template>
+              <a-radio-group @change="onChange1" defaultValue="1">
+                 <a-radio :value="1">匿名</a-radio>
+                 <a-radio :value="2">不匿名</a-radio>
+              </a-radio-group>
+            </template>
             <a-form-item>
               <a-button htmlType="submit" :loading="submitting" @click="handleSubmit" type="primary">
                 评论
@@ -67,9 +74,10 @@ export default {
   },
   data() {
     return {
+        value: 1,
         comments: [],
         submitting: false,
-        value: '',
+        commentContent: '',
         moment,
         current: 1,
         totalPage:'',
@@ -78,17 +86,23 @@ export default {
         post_title: '',
         post_content: '',
         post_sendTime: '',
+        post_owner:'',
         post_headPortrait: '',//楼主的头像
         postID: this.$route.params.id,
         sendInfo:'',//评论是否成功信息
         comment:{
           'treeholeID':'',
           'content':'',
+          'incognito':'',
         }
 
       };
    },
    methods: {
+      onChange1(e) {
+        console.log(`checked = ${e.target.value}`);
+        this.comment.incognito=(`${e.target.value}`);
+      },
       addComment(){
         sendComment(this.comment).then((response) => {
         this.sendInfo = response.info1
@@ -111,20 +125,21 @@ export default {
        })
       },
       handleSubmit() {
-        if (!this.value) {
+        if (!this.commentContent) {
           return;
         }
         this.submitting = true;
         setTimeout(() => {
           this.submitting = false;
           this.comment.treeholeID=this.postID,
-          this.comment.content=this.value,
+          this.comment.content=this.commentContent,
+          console.log(this.comment),
           addComment(),
-          this.value = '';
-        }, 1000);
+          this.comment = '';
+        }, 1000);commentContent
       },
       handleChange(e) {
-        this.value = e.target.value;
+        this.commentContent = e.target.value;
       },
       onChange(current){
         this.current=current;
@@ -146,6 +161,7 @@ export default {
         this.post_content=this.allData.content;
         this.post_sendTime=this.allData.sendTime;
         this.post_headPortrait=this.allData.headPortrait;
+        this.post_owner=this.allData.post_owner
       }),
       getComment(this.postID).then((response)=>{
         console.log(response);

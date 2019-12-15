@@ -3,7 +3,6 @@ import { axios } from '@/utils/request'
 const api = {
   allTeacher: '/teacher/allTeacher',
   teacherDetail: 'teacher/teacherDetail'
-
 }
 
 export default api

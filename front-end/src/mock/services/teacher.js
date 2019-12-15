@@ -116,18 +116,25 @@ const allTeacher = (data) => {
 const teacherDetail = ( data ) => {
   let detail = {
     '1':
-      {
-       'id': '1',
-      'name': '李一',
-      'headPortrait': '/avatar2.jpg',
-      'type': '修理类型：2',
-      'state': '0',
-      'introduction':'被看见、被听见、被理解、被接受。',
-      'address':'同济大学心理咨询室',
-      'telNumber':'12332532',
+      [{
+        day:1,
+        period:3,
       },
+        {
+          day:1,
+          period:3,
+        },
+        {
+          day:2,
+          period:4,
+        },
+        {
+          day:1,
+          period:5,
+        },
+      ],
     '2':
-      {
+      [{
         'id': '1',
         'name': '李一',
         'headPortrait': '/avatar2.jpg',
@@ -137,9 +144,9 @@ const teacherDetail = ( data ) => {
         'address':'同济大学心理咨询室',
         'telNumber':'12332532',
 
-      },
+      },],
     '3':
-      {
+      [{
         'id': '1',
         'name': '李一',
         'headPortrait': '/avatar2.jpg',
@@ -148,7 +155,7 @@ const teacherDetail = ( data ) => {
         'introduction':'被看见、被听见、被理解、被接受。',
         'address':'同济大学心理咨询室',
         'telNumber':'12332532',
-      },
+      },],
 
   }
   return {

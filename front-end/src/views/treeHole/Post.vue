@@ -13,6 +13,18 @@
       <a-card style="top:10px">
       <a-list itemLayout="horizontal" :dataSource="Data">
           <a-list-item slot="renderItem" slot-scope="item, index">
+            <a slot="actions" @click="onClickDelete(item)">删除</a>
+            <a-modal
+                title="确认删除"
+                :visible="visible3"
+                @ok="onClickDeleteRow"
+                :confirmLoading="confirmLoading"
+                @cancel="Cancel"
+            >
+            <div>
+                是否删除本条帖子
+             </div>
+             </a-modal>
               <a-list-item-meta :title='item.title'>
                 <a-avatar
                   width="72"
@@ -71,7 +83,7 @@
                 hasFeedback
               >
                 <template>
-                    <a-radio-group name="radioGroup" :defaultValue="1">
+                    <a-radio-group @change="onChange" defaultValue="1">
                         <a-radio :value="1">匿名</a-radio>
                         <a-radio :value="2">不匿名</a-radio>
                     </a-radio-group>
@@ -96,7 +108,7 @@
 import moment from 'moment'
 import { TagSelect, StandardFormRow, Ellipsis, AvatarList } from '@/components'
 import Fuse from 'fuse.js'
-import { getPost, sendTreehole} from '@/api/Treehole'
+import { getPost, sendTreehole, deleteTreehole} from '@/api/Treehole'
   import {timeFix} from '@/utils/util'
   import {mapGetters} from 'vuex'
   import {Button} from 'ant-design-vue'
@@ -121,12 +133,17 @@ import { getPost, sendTreehole} from '@/api/Treehole'
     },
     data() {
       return {
+        value: 1,
         Data:[],
         allData:[],
+        user: {},
         current: 1,
         totalPage: '',
         visible: false,
+        visible3: false,
         visible5: false,
+        todelete:'',
+        owner:'',
         addmdl:{
           'title':'',
           'content':'',
@@ -147,8 +164,36 @@ import { getPost, sendTreehole} from '@/api/Treehole'
         }
         return "success"
       },
+      userInfo() {
+        return this.$store.getters.userInfo
+      }
+    },
+    created() {
+      this.user = this.userInfo
     },
    methods: {
+      onClickDelete (item) {
+        this.todelete = item.id;
+        this.owner = item.postOwner;
+        console.log(this.owner);
+        console.log(this.userInfo.name);
+        if(this.owner==this.userInfo.name){
+          this.visible3 = true;
+        }else{
+          this.$notification.open({
+          message: '删除失败',
+          description: '删除失败，您没有删除的权限',
+          icon: <a-icon type="warning" style="color: #108ee9" />,
+        })
+       }
+      },
+      Cancel(){
+        this.visible3=false;
+      },
+       onChange(e) {
+        console.log(`checked = ${e.target.value}`);
+        this.addmdl.incognito=(`${e.target.value}`);
+       },
        handleAdd () {
           this.visible = true
        },
@@ -170,13 +215,35 @@ import { getPost, sendTreehole} from '@/api/Treehole'
       }
       this.visible5 = true
       },
+      onClickDeleteRow () {
+        this.visible3 = false
+        deleteTreehole(this.todelete).then((response) => {
+        this.deleteInfo = response.info
+        if(this.deleteInfo === 'ok'){
+          this.sfData = [...response.data]
+          this.sfDataShow = this.sfData
+          this.$notification.open({
+          message: '删除成功',
+          description: '本条发帖信息删除成功',
+          icon: <a-icon type="check" style="color: #108ee9" />,
+        });
+        }
+        else{
+          this.$notification.open({
+          message: '删除失败',
+          description: '本条发帖信息删除失败',
+          icon: <a-icon type="warning" style="color: #108ee9" />,
+        });
+        }
+      })
+      },
       onClickRefresh(){
         this.reload()
       },
       onClickNewRow(){
         this.visible = false
         this.visible5 = false
-        this.addmdl.incognito=this.value
+        console.log(this.addmdl.incognito)
        sendTreehole(this.addmdl).then((response) => {
         this.addInfo = response.info1
         if(this.addInfo === 'ok'){
@@ -199,6 +266,7 @@ import { getPost, sendTreehole} from '@/api/Treehole'
       },
     },
     mounted() {
+      console.log('vuex', this.userInfo)
       getPost(this.current).then((response)=>{
         this.allData=response.data;
         this.Data=this.allData.post; //当前页的树洞信息

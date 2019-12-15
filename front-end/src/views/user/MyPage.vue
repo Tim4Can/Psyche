@@ -100,8 +100,9 @@
              <a slot="actions" @click="onClickDelete(item.id)">删除</a>
              <a-modal
                 title="确认删除"
-                v-model="visible3"
+                :visible="visible3"
                 @ok="onClickDeleteRow"
+                @cancel="onClickCancel"
              >
              <div class="modal">
                 是否删除本条帖子
@@ -168,6 +169,7 @@ import {Button} from 'ant-design-vue'
 import HeadInfo from '@/components/tools/HeadInfo'
 import {Radar} from '@/components'
 import {getMyPost, getMyLike} from '@/api/myInfo'
+import {deleteTreehole} from '@/api/Treehole'
 import AFormItem from "ant-design-vue/es/form/FormItem";
 
 export default {
@@ -275,6 +277,9 @@ export default {
           }
         })
         this.showPasswordForm = false;
+      },
+      onClickCancel(){
+        this.visible3=false;
       },
       onChange1(current){
         this.current1=current;

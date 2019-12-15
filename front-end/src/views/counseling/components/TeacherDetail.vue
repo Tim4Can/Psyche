@@ -159,7 +159,7 @@ export default {
     return {
       teacherID:this.$route.params.details.id,
       details: this.$route.params.details,
-      TimeData:'',
+      TimeData:[],
       day:'',
       period:'',
       time:{
